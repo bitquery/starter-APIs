@@ -99,6 +99,24 @@ Sum outputs and subtract inputs with a `height: {lteq: N}` cap to get the wallet
 
 ### Price & OHLC
 
+#### Latest Bitcoin price
+
+The current BTC price in USD from the [Crypto Price API](/docs/trading/crypto-price-api/currency). `bid:bitcoin` blends native BTC, WBTC, cbBTC and other wrapped versions across chains into one price, returned with USD volume and market cap.
+
+▶️ [Latest Bitcoin price](https://ide.bitquery.io/Latest-Bitcoin-Price-Trading-API)
+
+#### Latest Bitcoin price on each chain
+
+One latest USD price per BTC representation (WBTC on Ethereum, cbBTC on Base and so on) from the [Tokens cube](/docs/trading/crypto-price-api/tokens). Use it to spot a wrapped BTC trading away from the blended price.
+
+▶️ [Latest Bitcoin price on each chain](https://ide.bitquery.io/Latest-Bitcoin-Price-on-Each-Chain)
+
+#### Latest BTC/USDT price on every market
+
+The latest BTC/USDT price from each DEX market across chains, one row per market. Useful for comparing venues and finding arbitrage gaps.
+
+▶️ [Latest BTC/USDT price on every market](https://ide.bitquery.io/Find-arbitrage-opportunity-with-same-token-across-chains_1)
+
 #### Btc price in 2016
 
 Pulls the BTC/USD price implied by any output on a given date — Bitquery stores the spot value at the time of each transaction, so you can derive a historical price by dividing USD value by BTC value.
