@@ -16,6 +16,7 @@ Every subscription below is saved in the [Bitquery IDE](https://ide.bitquery.io)
 
 ## Table of Contents
 
+- [Arc Mainnet](#arc-mainnet)
 - [Bitcoin](#bitcoin)
 - [Solana](#solana)
 - [Robinhood Chain](#robinhood-chain)
@@ -33,6 +34,70 @@ Every subscription below is saved in the [Bitquery IDE](https://ide.bitquery.io)
 - [Stablecoins](#stablecoins)
 - [NFTs](#nfts)
 - [x402](#x402)
+
+## Arc Mainnet
+
+### Trades
+
+#### Stream real-time trades on Arc
+
+One WebSocket delivers every swap on the network as blocks are indexed, with both sides, the protocol and the trader.
+
+▶️ [Stream real-time trades on Arc](https://ide.bitquery.io/arc-mainnet-stream-dex-trades)
+
+### Transfers
+
+#### Stream real-time transfers on Arc
+
+Every transfer on the network as it is indexed. Filter inside `where` to narrow the socket to a token, an address or a size floor.
+
+▶️ [Stream real-time transfers on Arc](https://ide.bitquery.io/arc-mainnet-stream-transfers)
+
+### Balances & Holders
+
+#### Stream balance changes on Arc
+
+Every balance change of a wallet as it happens. Widen the filter to a list of addresses or a single token to build alerts.
+
+▶️ [Stream balance changes on Arc](https://ide.bitquery.io/arc-mainnet-docs-balances-stream-balance-changes)
+
+### Supply & Market Cap
+
+#### Stream supply changes on Arc
+
+A new row arrives whenever a mint or burn changes the supply of the token.
+
+▶️ [Stream supply changes on Arc](https://ide.bitquery.io/arc-mainnet-docs-balances-stream-supply-changes)
+
+### Transactions
+
+#### Stream transactions on Arc
+
+Every transaction as blocks are indexed. Arc produces a block well under every second, so expect a steady feed.
+
+▶️ [Stream transactions on Arc](https://ide.bitquery.io/arc-mainnet-stream-transactions)
+
+### Events & Calls
+
+#### Stream calls to a contract on Arc
+
+Every call into the Uniswap v4 PoolManager, internal or top-level, as it happens.
+
+▶️ [Stream calls to a contract on Arc](https://ide.bitquery.io/arc-mainnet-stream-calls-to-contract)
+
+#### Stream all events on Arc
+
+One socket, every event on the chain. Good for building an indexer; heavy for anything else, so use the filtered streams below in production.
+
+▶️ [Stream all events on Arc](https://ide.bitquery.io/arc-mainnet-stream-all-events)
+
+### Launchpads
+
+#### Stream launches on Arc
+
+Change nothing else to receive launches from all six platforms over one WebSocket. Add or remove contract and signature pairs as launchpads deploy new versions.
+
+▶️ [Stream launches on Arc](https://ide.bitquery.io/arc-mainnet-docs-launchpads-stream-launches)
 
 ## Bitcoin
 

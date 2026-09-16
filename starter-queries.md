@@ -16,6 +16,7 @@ Every query below is saved in the [Bitquery IDE](https://ide.bitquery.io) and wa
 
 ## Table of Contents
 
+- [Arc Mainnet](#arc-mainnet)
 - [Bitcoin](#bitcoin)
 - [Solana](#solana)
 - [Robinhood Chain](#robinhood-chain)
@@ -48,6 +49,364 @@ Every query below is saved in the [Bitquery IDE](https://ide.bitquery.io) and wa
 - [NFTs](#nfts)
 - [Futures DEXs](#futures-dexs)
 - [x402](#x402)
+
+## Arc Mainnet
+
+### Trades
+
+#### Quick start: latest Arc mainnet swaps
+
+This query returns the newest swaps with USD values and the DEX name.
+
+▶️ [Quick start: latest Arc mainnet swaps](https://ide.bitquery.io/arc-mainnet-docs-overview-quick-start-latest-arc-mainnet-swaps)
+
+#### Latest trades on Arc
+
+The most recent swaps on the network. `Trade.Buy` is the currency the trader received and `Trade.Sell` is what they paid.
+
+▶️ [Latest trades on Arc](https://ide.bitquery.io/arc-mainnet-latest-dex-trades)
+
+#### Trades of a token on Arc
+
+`DEXTradeByTokens` returns one row per token side of every trade, so a token filter catches it whether it was bought or sold. `Side.Type` says which direction the trade was from the token's point of view.
+
+▶️ [Trades of a token on Arc](https://ide.bitquery.io/arc-mainnet-trades-of-a-token)
+
+#### Trades on one DEX on Arc
+
+Filter by `Dex.ProtocolName`. Values seen on Arc mainnet are `uniswap_v4`, `uniswap_v3`, `uniswap_v2`, `curve_v1` and `aerodrome_v1`.
+
+▶️ [Trades on one DEX on Arc](https://ide.bitquery.io/arc-mainnet-uniswap-v4-trades)
+
+#### Trades in one pool on Arc
+
+For Uniswap v2 and v3 the pool has its own address in `Trade.Dex.SmartContract`. This example reads a live v3 BUILDOG/USDC pool.
+
+▶️ [Trades in one pool on Arc](https://ide.bitquery.io/arc-mainnet-trades-in-a-pool)
+
+#### Trades of a wallet on Arc
+
+`Transaction.From` is the externally owned account that signed the swap. `Trade.Buy.Buyer` and `Trade.Sell.Seller` are the addresses that received and paid the tokens, which can be a router rather than the signer.
+
+▶️ [Trades of a wallet on Arc](https://ide.bitquery.io/arc-mainnet-trades-of-a-wallet)
+
+#### Most traded tokens on Arc
+
+Tokens ranked by trade count over the last 24 hours. Native USDC is the quote on most pools, so it tops the list; the rows under it are the tokens people actually trade.
+
+▶️ [Most traded tokens on Arc](https://ide.bitquery.io/arc-mainnet-most-traded-tokens)
+
+#### Trade count by DEX protocol on Arc
+
+Which DEXes carry mainnet volume. Uniswap v4 led the launch-day check.
+
+▶️ [Trade count by DEX protocol on Arc](https://ide.bitquery.io/arc-mainnet-trades-by-dex)
+
+#### Most active traders on Arc
+
+Signers ranked by swap count. The top rows often include bots and routers, so inspect the address before treating it as a person.
+
+▶️ [Most active traders on Arc](https://ide.bitquery.io/arc-mainnet-most-active-traders)
+
+### Transfers
+
+#### Latest transfers on Arc
+
+The most recent token and native USDC transfers on Arc mainnet.
+
+▶️ [Latest transfers on Arc](https://ide.bitquery.io/arc-mainnet-latest-transfers)
+
+#### Native USDC transfers on Arc
+
+`Currency: {Native: true}` selects value transfers of the gas token. The floor of 100 USDC keeps dust and fee movements out.
+
+▶️ [Native USDC transfers on Arc](https://ide.bitquery.io/arc-mainnet-native-usdc-transfers)
+
+#### Transfers of a token on Arc
+
+Filter on the token contract. This example reads the ERC-20 USDC interface; swap in EURC or any test token.
+
+▶️ [Transfers of a token on Arc](https://ide.bitquery.io/arc-mainnet-erc20-usdc-transfers)
+
+#### Transfers of an address on Arc
+
+Incoming and outgoing transfers in one list. Replace the address with any wallet or contract.
+
+▶️ [Transfers of an address on Arc](https://ide.bitquery.io/arc-mainnet-transfers-of-an-address)
+
+#### Sent and received totals per token on Arc
+
+Two aliased selections give the outbound and inbound sums per currency for a wallet.
+
+▶️ [Sent and received totals per token on Arc](https://ide.bitquery.io/arc-mainnet-address-sent-received)
+
+#### Transfers between two addresses on Arc
+
+Flows from one address to another, in either direction. Useful for tracing a faucet, a bridge or a counterparty.
+
+▶️ [Transfers between two addresses on Arc](https://ide.bitquery.io/arc-mainnet-transfers-between-addresses)
+
+#### Large transfers on Arc
+
+This catches ERC-20 USDC moves above 10,000 and returns both token and USD amounts.
+
+▶️ [Large transfers on Arc](https://ide.bitquery.io/arc-mainnet-large-usdc-transfers)
+
+#### Most transferred tokens on Arc
+
+Tokens ranked by transfer count over 24 hours, with distinct senders and receivers. The system ledger address is excluded.
+
+▶️ [Most transferred tokens on Arc](https://ide.bitquery.io/arc-mainnet-most-transferred-tokens)
+
+#### Hourly transfer volume of a token on Arc
+
+Transfer volume of ERC-20 USDC bucketed by hour, for charts and alerts.
+
+▶️ [Hourly transfer volume of a token on Arc](https://ide.bitquery.io/arc-mainnet-hourly-transfer-volume)
+
+### Balances & Holders
+
+#### Portfolio of a wallet on Arc
+
+Every currency an address holds, with the computed balance and when it last changed. Native USDC has `Native: true`; the ERC-20 interface at `0x3600...` is listed separately.
+
+▶️ [Portfolio of a wallet on Arc](https://ide.bitquery.io/arc-mainnet-docs-balances-portfolio-of-a-wallet)
+
+#### Balance of one token on Arc
+
+The `balanceOf` equivalent for ERC-20 USDC. For the gas token use `Currency: {Native: true}` instead of a contract filter.
+
+▶️ [Balance of one token on Arc](https://ide.bitquery.io/arc-mainnet-docs-balances-balance-of-one-token)
+
+#### Balances of several wallets on Arc
+
+One call for a batch of addresses, grouped by address and currency.
+
+▶️ [Balances of several wallets on Arc](https://ide.bitquery.io/arc-mainnet-docs-balances-balances-of-several-wallets)
+
+#### Top holders of a token on Arc
+
+Current EURC holders ranked by token balance. Add `Balance: {Amount: {gt: "0"}}` so wallets that once held the token but now hold zero do not appear.
+
+▶️ [Top holders of a token on Arc](https://ide.bitquery.io/arc-mainnet-docs-balances-top-holders-of-a-token)
+
+#### Balance history of a wallet on Arc
+
+Each change to a wallet's ERC-20 USDC balance, newest first, with the transaction behind it. Positive amounts are inflows.
+
+▶️ [Balance history of a wallet on Arc](https://ide.bitquery.io/arc-mainnet-docs-balances-balance-history-of-a-wallet)
+
+#### Net change per currency over a window on Arc
+
+Sum the updates per currency to see what a wallet gained or lost over the last 24 hours.
+
+▶️ [Net change per currency over a window on Arc](https://ide.bitquery.io/arc-mainnet-docs-balances-net-change-per-currency-over-a-window)
+
+### Price & OHLC
+
+#### OHLCV candles for a token on Arc
+
+Hourly candles for EURC priced in ERC-20 USDC. `Block.Time(interval: ...)` buckets the trades; `open` and `close` take the price at the lowest and highest block in the bucket. Change `count` and `in` for other intervals.
+
+▶️ [OHLCV candles for a token on Arc](https://ide.bitquery.io/arc-mainnet-ohlcv-candles)
+
+#### Latest price of a token on Arc
+
+The price of the most recent EURC trade against ERC-20 USDC. `Trade.PriceInUSD` is populated on Arc mainnet.
+
+▶️ [Latest price of a token on Arc](https://ide.bitquery.io/arc-mainnet-latest-token-price)
+
+### Supply & Market Cap
+
+#### Total supply of a token on Arc
+
+`TransactionBalances` records the token's total supply after each transaction that touched it. The latest row is the current supply, already adjusted for decimals.
+
+▶️ [Total supply of a token on Arc](https://ide.bitquery.io/arc-mainnet-docs-balances-total-supply-of-a-token)
+
+### Liquidity & Pools
+
+#### New Uniswap v4 pools on Arc
+
+Uniswap v4 carried most launch-day swaps. A new pool is an `Initialize` event on the PoolManager; its arguments give the pool `id`, the two currencies, the fee tier, tick spacing, hook address and opening price.
+
+▶️ [New Uniswap v4 pools on Arc](https://ide.bitquery.io/arc-mainnet-new-uniswap-v4-pools)
+
+#### New Uniswap v3 and v2 pools on Arc
+
+Several v3 and v2 factory deployments appeared on mainnet, so filter on the event name rather than one factory address. `PoolCreated` is v3, `PairCreated` is v2; both carry the two tokens and the new pool address in their arguments.
+
+▶️ [New Uniswap v3 and v2 pools on Arc](https://ide.bitquery.io/arc-mainnet-new-v3-v2-pools)
+
+### Transactions
+
+#### Latest transactions on Arc
+
+The most recent transactions on Arc mainnet, newest first.
+
+▶️ [Latest transactions on Arc](https://ide.bitquery.io/arc-mainnet-latest-transactions)
+
+#### Transaction by hash on Arc
+
+The equivalent of `eth_getTransactionByHash` plus `eth_getTransactionReceipt` in one call. The example hash is a live USDC value transfer; replace it with any recent hash.
+
+▶️ [Transaction by hash on Arc](https://ide.bitquery.io/arc-mainnet-transaction-by-hash)
+
+#### Transactions of an address on Arc
+
+Sent and received transactions of one address, newest first. This is the explorer's address page.
+
+▶️ [Transactions of an address on Arc](https://ide.bitquery.io/arc-mainnet-transactions-of-an-address)
+
+#### Failed transactions on Arc
+
+Transactions whose receipt status is 0. Join the [reverted calls](/docs/blockchain/arc-mainnet/arc-mainnet-calls-api/#reverted-calls) query on the hash to see the revert reason.
+
+▶️ [Failed transactions on Arc](https://ide.bitquery.io/arc-mainnet-failed-transactions)
+
+#### Gas fees in USDC on Arc
+
+Because gas is paid in USDC, `Fee.SenderFee` is already a dollar amount. This gives the average, median and total fee per hour along with the average effective gas price.
+
+▶️ [Gas fees in USDC on Arc](https://ide.bitquery.io/arc-mainnet-gas-fee-statistics)
+
+### Events & Calls
+
+#### Latest calls on Arc
+
+The most recent top-level calls, one per transaction.
+
+▶️ [Latest calls on Arc](https://ide.bitquery.io/arc-mainnet-latest-calls)
+
+#### Calls of one method on Arc
+
+Filter on the decoded method name and the contract. This reads `transfer` calls into the ERC-20 USDC contract with their decoded arguments.
+
+▶️ [Calls of one method on Arc](https://ide.bitquery.io/arc-mainnet-calls-of-a-method)
+
+#### Calls by 4-byte selector on Arc
+
+When the ABI is not registered, filter on the selector in `Call.Input` instead. This matches `approve(address,uint256)` by its `0x095ea7b3` prefix on any contract.
+
+▶️ [Calls by 4-byte selector on Arc](https://ide.bitquery.io/arc-mainnet-calls-by-selector)
+
+#### Internal calls of a transaction on Arc
+
+The full call tree of one transaction, ordered by call index. Replace the hash with any recent transaction from the [Transactions API](/docs/blockchain/arc-mainnet/arc-mainnet-transactions-api/).
+
+▶️ [Internal calls of a transaction on Arc](https://ide.bitquery.io/arc-mainnet-internal-calls-of-transaction)
+
+#### Contract deployments on Arc
+
+`Call.Create: true` marks a call that deployed a contract. The new address is in `Receipt.ContractAddress` for top-level deployments; for factory deployments read `Call.To` on the create call.
+
+▶️ [Contract deployments on Arc](https://ide.bitquery.io/arc-mainnet-contract-deployments)
+
+#### Reverted calls on Arc
+
+Calls that reverted, with the error string when the EVM returned one. Useful for debugging a contract under test.
+
+▶️ [Reverted calls on Arc](https://ide.bitquery.io/arc-mainnet-reverted-calls)
+
+#### Most called methods on Arc
+
+Method signatures ranked by call count over 24 hours. ERC-20 `transfer`, `balanceOf` and `approve` dominate, followed by Uniswap v4 hook callbacks.
+
+▶️ [Most called methods on Arc](https://ide.bitquery.io/arc-mainnet-most-called-methods)
+
+#### Calls that move native USDC on Arc
+
+Internal calls that carried native USDC value. This is how value moves between contracts shows up, since those movements are not ERC-20 `Transfer` events.
+
+▶️ [Calls that move native USDC on Arc](https://ide.bitquery.io/arc-mainnet-calls-with-value)
+
+#### Events from one contract on Arc
+
+`LogHeader.Address` is the `address` filter of `eth_getLogs`. This reads the latest events of the ERC-20 USDC contract.
+
+▶️ [Events from one contract on Arc](https://ide.bitquery.io/arc-mainnet-events-from-a-contract)
+
+#### One event across all contracts on Arc
+
+Filter by decoded signature name to watch one event type from every contract that emits it. This catches every `Swap`, from Uniswap v2 pairs, v3 pools and the v4 PoolManager alike.
+
+▶️ [One event across all contracts on Arc](https://ide.bitquery.io/arc-mainnet-swap-events)
+
+#### Filter by raw topic0 on Arc
+
+When you have the signature hash rather than the name, filter on `Log.Signature.SignatureHash`. This is the ERC-20 `Transfer(address,address,uint256)` hash, written without `0x`.
+
+▶️ [Filter by raw topic0 on Arc](https://ide.bitquery.io/arc-mainnet-events-by-topic0)
+
+#### Filter by a decoded argument on Arc
+
+Server-side filtering on decoded values is what a node cannot do. This finds every event whose argument named `to` equals a wallet, across all contracts and signatures.
+
+▶️ [Filter by a decoded argument on Arc](https://ide.bitquery.io/arc-mainnet-events-by-argument)
+
+#### Busiest contracts and signatures on Arc
+
+Which contracts and event types dominate the log stream over 24 hours. Run this first on any network you have not explored yet.
+
+▶️ [Busiest contracts and signatures on Arc](https://ide.bitquery.io/arc-mainnet-busiest-event-contracts)
+
+#### Undecoded events on Arc
+
+Events whose ABI is not registered arrive with an empty `Signature.Name` and no `Arguments`, but the raw `Topics` and `Log.SmartContract` are still there. This lists the contracts emitting the most undecoded events; if one matters to you, ask support to register its ABI.
+
+▶️ [Undecoded events on Arc](https://ide.bitquery.io/arc-mainnet-undecoded-events)
+
+### Launchpads
+
+#### Latest launches on Arc
+
+Use the same filters with `query`, a row limit, and descending block time to fetch the newest launches.
+
+▶️ [Latest launches on Arc](https://ide.bitquery.io/arc-mainnet-docs-launchpads-latest-launches)
+
+#### Launch count by platform on Arc
+
+Group launch events by emitting contract to compare activity during the last hour. The result uses contract addresses, so map them to the table above in your app.
+
+▶️ [Launch count by platform on Arc](https://ide.bitquery.io/arc-mainnet-docs-launchpads-launch-count-by-platform)
+
+#### Trades for a launched token on Arc
+
+Copy the token address from `Topics[1]` into `Trade.Currency.SmartContract`. This example follows a token launched through RadarDEX.
+
+▶️ [Trades for a launched token on Arc](https://ide.bitquery.io/arc-mainnet-docs-launchpads-trades-for-a-launched-token)
+
+#### OHLCV for a launched token on Arc
+
+This query builds five-minute candles for the same token against Arc's ERC-20 USDC interface. It returns USD volume, open, high, low, close, and trade count.
+
+▶️ [OHLCV for a launched token on Arc](https://ide.bitquery.io/arc-mainnet-docs-launchpads-ohlcv-for-a-launched-token)
+
+### Blocks & Validators
+
+#### Datasets and history on Arc
+
+On 16 September 2026, only the realtime path answered. Its depth changes, so measure the current window before running a long-range query.
+
+▶️ [Datasets and history on Arc](https://ide.bitquery.io/arc-mainnet-docs-overview-datasets-and-history)
+
+#### Latest blocks on Arc
+
+Change `query` to `subscription` and drop `limit` and `orderBy` to receive each block header as it is indexed.
+
+▶️ [Latest blocks on Arc](https://ide.bitquery.io/arc-mainnet-latest-blocks)
+
+#### Block by number on Arc
+
+Header, gas and transaction count of one Arc mainnet block.
+
+▶️ [Block by number on Arc](https://ide.bitquery.io/arc-mainnet-block-by-number)
+
+#### Block and throughput statistics on Arc
+
+Blocks, transactions, average transactions per block and average gas per block for each of the last 24 hours. Divide the block count by 3600 to get blocks per second.
+
+▶️ [Block and throughput statistics on Arc](https://ide.bitquery.io/arc-mainnet-block-statistics)
 
 ## Bitcoin
 
