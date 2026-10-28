@@ -16,499 +16,62 @@ Every query below is saved in the [Bitquery IDE](https://ide.bitquery.io) and wa
 
 ## Table of Contents
 
-- [Arc Mainnet](#arc-mainnet)
-- [Bitcoin](#bitcoin)
+- [Most Popular Queries](#most-popular-queries)
 - [Solana](#solana)
 - [Robinhood Chain](#robinhood-chain)
+- [Tokenized Stocks](#tokenized-stocks)
 - [Polymarket](#polymarket)
 - [Perpetuals](#perpetuals)
 - [TRON](#tron)
-- [Cross-Chain](#cross-chain)
+- [Bitcoin](#bitcoin)
 - [Ethereum](#ethereum)
 - [BSC](#bsc)
 - [Base](#base)
+- [Cross-Chain](#cross-chain)
+- [Trading API](#trading-api)
+- [Stablecoins](#stablecoins)
+- [NFTs](#nfts)
+- [Futures DEXs](#futures-dexs)
 - [Arbitrum](#arbitrum)
 - [Optimism](#optimism)
 - [Polygon](#polygon)
 - [Avalanche](#avalanche)
+- [Arc Mainnet](#arc-mainnet)
+- [x402](#x402)
 - [Celo](#celo)
 - [Cronos](#cronos)
 - [Klaytn](#klaytn)
-- [Litecoin](#litecoin)
-- [Bitcoin Cash](#bitcoin-cash)
-- [Dogecoin](#dogecoin)
-- [Dash](#dash)
-- [Zcash](#zcash)
 - [Cardano](#cardano)
 - [Ripple](#ripple)
 - [Stellar](#stellar)
 - [Algorand](#algorand)
 - [Filecoin](#filecoin)
-- [Trading API](#trading-api)
-- [Stablecoins](#stablecoins)
-- [NFTs](#nfts)
-- [Futures DEXs](#futures-dexs)
-- [x402](#x402)
-
-## Arc Mainnet
-
-### Trades
-
-#### Quick start: latest Arc mainnet swaps
-
-This query returns the newest swaps with USD values and the DEX name.
-
-▶️ [Quick start: latest Arc mainnet swaps](https://ide.bitquery.io/arc-mainnet-docs-overview-quick-start-latest-arc-mainnet-swaps)
-
-#### Latest trades on Arc
-
-The most recent swaps on the network. `Trade.Buy` is the currency the trader received and `Trade.Sell` is what they paid.
-
-▶️ [Latest trades on Arc](https://ide.bitquery.io/arc-mainnet-latest-dex-trades)
-
-#### Trades of a token on Arc
-
-`DEXTradeByTokens` returns one row per token side of every trade, so a token filter catches it whether it was bought or sold. `Side.Type` says which direction the trade was from the token's point of view.
-
-▶️ [Trades of a token on Arc](https://ide.bitquery.io/arc-mainnet-trades-of-a-token)
-
-#### Trades on one DEX on Arc
-
-Filter by `Dex.ProtocolName`. Values seen on Arc mainnet are `uniswap_v4`, `uniswap_v3`, `uniswap_v2`, `curve_v1` and `aerodrome_v1`.
-
-▶️ [Trades on one DEX on Arc](https://ide.bitquery.io/arc-mainnet-uniswap-v4-trades)
-
-#### Trades in one pool on Arc
-
-For Uniswap v2 and v3 the pool has its own address in `Trade.Dex.SmartContract`. This example reads a live v3 BUILDOG/USDC pool.
-
-▶️ [Trades in one pool on Arc](https://ide.bitquery.io/arc-mainnet-trades-in-a-pool)
-
-#### Trades of a wallet on Arc
-
-`Transaction.From` is the externally owned account that signed the swap. `Trade.Buy.Buyer` and `Trade.Sell.Seller` are the addresses that received and paid the tokens, which can be a router rather than the signer.
-
-▶️ [Trades of a wallet on Arc](https://ide.bitquery.io/arc-mainnet-trades-of-a-wallet)
-
-#### Most traded tokens on Arc
-
-Tokens ranked by trade count over the last 24 hours. Native USDC is the quote on most pools, so it tops the list; the rows under it are the tokens people actually trade.
-
-▶️ [Most traded tokens on Arc](https://ide.bitquery.io/arc-mainnet-most-traded-tokens)
-
-#### Trade count by DEX protocol on Arc
-
-Which DEXes carry mainnet volume. Uniswap v4 led the launch-day check.
-
-▶️ [Trade count by DEX protocol on Arc](https://ide.bitquery.io/arc-mainnet-trades-by-dex)
-
-#### Most active traders on Arc
-
-Signers ranked by swap count. The top rows often include bots and routers, so inspect the address before treating it as a person.
-
-▶️ [Most active traders on Arc](https://ide.bitquery.io/arc-mainnet-most-active-traders)
-
-### Transfers
-
-#### Latest transfers on Arc
-
-The most recent token and native USDC transfers on Arc mainnet.
-
-▶️ [Latest transfers on Arc](https://ide.bitquery.io/arc-mainnet-latest-transfers)
-
-#### Native USDC transfers on Arc
-
-`Currency: {Native: true}` selects value transfers of the gas token. The floor of 100 USDC keeps dust and fee movements out.
-
-▶️ [Native USDC transfers on Arc](https://ide.bitquery.io/arc-mainnet-native-usdc-transfers)
-
-#### Transfers of a token on Arc
-
-Filter on the token contract. This example reads the ERC-20 USDC interface; swap in EURC or any test token.
-
-▶️ [Transfers of a token on Arc](https://ide.bitquery.io/arc-mainnet-erc20-usdc-transfers)
-
-#### Transfers of an address on Arc
-
-Incoming and outgoing transfers in one list. Replace the address with any wallet or contract.
-
-▶️ [Transfers of an address on Arc](https://ide.bitquery.io/arc-mainnet-transfers-of-an-address)
-
-#### Sent and received totals per token on Arc
-
-Two aliased selections give the outbound and inbound sums per currency for a wallet.
-
-▶️ [Sent and received totals per token on Arc](https://ide.bitquery.io/arc-mainnet-address-sent-received)
-
-#### Transfers between two addresses on Arc
-
-Flows from one address to another, in either direction. Useful for tracing a faucet, a bridge or a counterparty.
-
-▶️ [Transfers between two addresses on Arc](https://ide.bitquery.io/arc-mainnet-transfers-between-addresses)
-
-#### Large transfers on Arc
-
-This catches ERC-20 USDC moves above 10,000 and returns both token and USD amounts.
-
-▶️ [Large transfers on Arc](https://ide.bitquery.io/arc-mainnet-large-usdc-transfers)
-
-#### Most transferred tokens on Arc
-
-Tokens ranked by transfer count over 24 hours, with distinct senders and receivers. The system ledger address is excluded.
-
-▶️ [Most transferred tokens on Arc](https://ide.bitquery.io/arc-mainnet-most-transferred-tokens)
-
-#### Hourly transfer volume of a token on Arc
-
-Transfer volume of ERC-20 USDC bucketed by hour, for charts and alerts.
-
-▶️ [Hourly transfer volume of a token on Arc](https://ide.bitquery.io/arc-mainnet-hourly-transfer-volume)
-
-### Balances & Holders
-
-#### Portfolio of a wallet on Arc
-
-Every currency an address holds, with the computed balance and when it last changed. Native USDC has `Native: true`; the ERC-20 interface at `0x3600...` is listed separately.
-
-▶️ [Portfolio of a wallet on Arc](https://ide.bitquery.io/arc-mainnet-docs-balances-portfolio-of-a-wallet)
-
-#### Balance of one token on Arc
-
-The `balanceOf` equivalent for ERC-20 USDC. For the gas token use `Currency: {Native: true}` instead of a contract filter.
-
-▶️ [Balance of one token on Arc](https://ide.bitquery.io/arc-mainnet-docs-balances-balance-of-one-token)
-
-#### Balances of several wallets on Arc
-
-One call for a batch of addresses, grouped by address and currency.
-
-▶️ [Balances of several wallets on Arc](https://ide.bitquery.io/arc-mainnet-docs-balances-balances-of-several-wallets)
-
-#### Top holders of a token on Arc
-
-Current EURC holders ranked by token balance. Add `Balance: {Amount: {gt: "0"}}` so wallets that once held the token but now hold zero do not appear.
-
-▶️ [Top holders of a token on Arc](https://ide.bitquery.io/arc-mainnet-docs-balances-top-holders-of-a-token)
-
-#### Balance history of a wallet on Arc
-
-Each change to a wallet's ERC-20 USDC balance, newest first, with the transaction behind it. Positive amounts are inflows.
-
-▶️ [Balance history of a wallet on Arc](https://ide.bitquery.io/arc-mainnet-docs-balances-balance-history-of-a-wallet)
-
-#### Net change per currency over a window on Arc
-
-Sum the updates per currency to see what a wallet gained or lost over the last 24 hours.
-
-▶️ [Net change per currency over a window on Arc](https://ide.bitquery.io/arc-mainnet-docs-balances-net-change-per-currency-over-a-window)
-
-### Price & OHLC
-
-#### OHLCV candles for a token on Arc
-
-Hourly candles for EURC priced in ERC-20 USDC. `Block.Time(interval: ...)` buckets the trades; `open` and `close` take the price at the lowest and highest block in the bucket. Change `count` and `in` for other intervals.
-
-▶️ [OHLCV candles for a token on Arc](https://ide.bitquery.io/arc-mainnet-ohlcv-candles)
-
-#### Latest price of a token on Arc
-
-The price of the most recent EURC trade against ERC-20 USDC. `Trade.PriceInUSD` is populated on Arc mainnet.
-
-▶️ [Latest price of a token on Arc](https://ide.bitquery.io/arc-mainnet-latest-token-price)
-
-### Supply & Market Cap
-
-#### Total supply of a token on Arc
-
-`TransactionBalances` records the token's total supply after each transaction that touched it. The latest row is the current supply, already adjusted for decimals.
-
-▶️ [Total supply of a token on Arc](https://ide.bitquery.io/arc-mainnet-docs-balances-total-supply-of-a-token)
-
-### Liquidity & Pools
-
-#### New Uniswap v4 pools on Arc
-
-Uniswap v4 carried most launch-day swaps. A new pool is an `Initialize` event on the PoolManager; its arguments give the pool `id`, the two currencies, the fee tier, tick spacing, hook address and opening price.
-
-▶️ [New Uniswap v4 pools on Arc](https://ide.bitquery.io/arc-mainnet-new-uniswap-v4-pools)
-
-#### New Uniswap v3 and v2 pools on Arc
-
-Several v3 and v2 factory deployments appeared on mainnet, so filter on the event name rather than one factory address. `PoolCreated` is v3, `PairCreated` is v2; both carry the two tokens and the new pool address in their arguments.
-
-▶️ [New Uniswap v3 and v2 pools on Arc](https://ide.bitquery.io/arc-mainnet-new-v3-v2-pools)
-
-### Transactions
-
-#### Latest transactions on Arc
-
-The most recent transactions on Arc mainnet, newest first.
-
-▶️ [Latest transactions on Arc](https://ide.bitquery.io/arc-mainnet-latest-transactions)
-
-#### Transaction by hash on Arc
-
-The equivalent of `eth_getTransactionByHash` plus `eth_getTransactionReceipt` in one call. The example hash is a live USDC value transfer; replace it with any recent hash.
-
-▶️ [Transaction by hash on Arc](https://ide.bitquery.io/arc-mainnet-transaction-by-hash)
-
-#### Transactions of an address on Arc
-
-Sent and received transactions of one address, newest first. This is the explorer's address page.
-
-▶️ [Transactions of an address on Arc](https://ide.bitquery.io/arc-mainnet-transactions-of-an-address)
-
-#### Failed transactions on Arc
-
-Transactions whose receipt status is 0. Join the [reverted calls](/docs/blockchain/arc-mainnet/arc-mainnet-calls-api/#reverted-calls) query on the hash to see the revert reason.
-
-▶️ [Failed transactions on Arc](https://ide.bitquery.io/arc-mainnet-failed-transactions)
-
-#### Gas fees in USDC on Arc
-
-Because gas is paid in USDC, `Fee.SenderFee` is already a dollar amount. This gives the average, median and total fee per hour along with the average effective gas price.
-
-▶️ [Gas fees in USDC on Arc](https://ide.bitquery.io/arc-mainnet-gas-fee-statistics)
-
-### Events & Calls
-
-#### Latest calls on Arc
-
-The most recent top-level calls, one per transaction.
-
-▶️ [Latest calls on Arc](https://ide.bitquery.io/arc-mainnet-latest-calls)
-
-#### Calls of one method on Arc
-
-Filter on the decoded method name and the contract. This reads `transfer` calls into the ERC-20 USDC contract with their decoded arguments.
-
-▶️ [Calls of one method on Arc](https://ide.bitquery.io/arc-mainnet-calls-of-a-method)
-
-#### Calls by 4-byte selector on Arc
-
-When the ABI is not registered, filter on the selector in `Call.Input` instead. This matches `approve(address,uint256)` by its `0x095ea7b3` prefix on any contract.
-
-▶️ [Calls by 4-byte selector on Arc](https://ide.bitquery.io/arc-mainnet-calls-by-selector)
-
-#### Internal calls of a transaction on Arc
-
-The full call tree of one transaction, ordered by call index. Replace the hash with any recent transaction from the [Transactions API](/docs/blockchain/arc-mainnet/arc-mainnet-transactions-api/).
-
-▶️ [Internal calls of a transaction on Arc](https://ide.bitquery.io/arc-mainnet-internal-calls-of-transaction)
-
-#### Contract deployments on Arc
-
-`Call.Create: true` marks a call that deployed a contract. The new address is in `Receipt.ContractAddress` for top-level deployments; for factory deployments read `Call.To` on the create call.
-
-▶️ [Contract deployments on Arc](https://ide.bitquery.io/arc-mainnet-contract-deployments)
-
-#### Reverted calls on Arc
-
-Calls that reverted, with the error string when the EVM returned one. Useful for debugging a contract under test.
-
-▶️ [Reverted calls on Arc](https://ide.bitquery.io/arc-mainnet-reverted-calls)
-
-#### Most called methods on Arc
-
-Method signatures ranked by call count over 24 hours. ERC-20 `transfer`, `balanceOf` and `approve` dominate, followed by Uniswap v4 hook callbacks.
-
-▶️ [Most called methods on Arc](https://ide.bitquery.io/arc-mainnet-most-called-methods)
-
-#### Calls that move native USDC on Arc
-
-Internal calls that carried native USDC value. This is how value moves between contracts shows up, since those movements are not ERC-20 `Transfer` events.
-
-▶️ [Calls that move native USDC on Arc](https://ide.bitquery.io/arc-mainnet-calls-with-value)
-
-#### Events from one contract on Arc
-
-`LogHeader.Address` is the `address` filter of `eth_getLogs`. This reads the latest events of the ERC-20 USDC contract.
-
-▶️ [Events from one contract on Arc](https://ide.bitquery.io/arc-mainnet-events-from-a-contract)
-
-#### One event across all contracts on Arc
-
-Filter by decoded signature name to watch one event type from every contract that emits it. This catches every `Swap`, from Uniswap v2 pairs, v3 pools and the v4 PoolManager alike.
-
-▶️ [One event across all contracts on Arc](https://ide.bitquery.io/arc-mainnet-swap-events)
-
-#### Filter by raw topic0 on Arc
-
-When you have the signature hash rather than the name, filter on `Log.Signature.SignatureHash`. This is the ERC-20 `Transfer(address,address,uint256)` hash, written without `0x`.
-
-▶️ [Filter by raw topic0 on Arc](https://ide.bitquery.io/arc-mainnet-events-by-topic0)
-
-#### Filter by a decoded argument on Arc
-
-Server-side filtering on decoded values is what a node cannot do. This finds every event whose argument named `to` equals a wallet, across all contracts and signatures.
-
-▶️ [Filter by a decoded argument on Arc](https://ide.bitquery.io/arc-mainnet-events-by-argument)
-
-#### Busiest contracts and signatures on Arc
-
-Which contracts and event types dominate the log stream over 24 hours. Run this first on any network you have not explored yet.
-
-▶️ [Busiest contracts and signatures on Arc](https://ide.bitquery.io/arc-mainnet-busiest-event-contracts)
-
-#### Undecoded events on Arc
-
-Events whose ABI is not registered arrive with an empty `Signature.Name` and no `Arguments`, but the raw `Topics` and `Log.SmartContract` are still there. This lists the contracts emitting the most undecoded events; if one matters to you, ask support to register its ABI.
-
-▶️ [Undecoded events on Arc](https://ide.bitquery.io/arc-mainnet-undecoded-events)
-
-### Launchpads
-
-#### Latest launches on Arc
-
-Use the same filters with `query`, a row limit, and descending block time to fetch the newest launches.
-
-▶️ [Latest launches on Arc](https://ide.bitquery.io/arc-mainnet-docs-launchpads-latest-launches)
-
-#### Launch count by platform on Arc
-
-Group launch events by emitting contract to compare activity during the last hour. The result uses contract addresses, so map them to the table above in your app.
-
-▶️ [Launch count by platform on Arc](https://ide.bitquery.io/arc-mainnet-docs-launchpads-launch-count-by-platform)
-
-#### Trades for a launched token on Arc
-
-Copy the token address from `Topics[1]` into `Trade.Currency.SmartContract`. This example follows a token launched through RadarDEX.
-
-▶️ [Trades for a launched token on Arc](https://ide.bitquery.io/arc-mainnet-docs-launchpads-trades-for-a-launched-token)
-
-#### OHLCV for a launched token on Arc
-
-This query builds five-minute candles for the same token against Arc's ERC-20 USDC interface. It returns USD volume, open, high, low, close, and trade count.
-
-▶️ [OHLCV for a launched token on Arc](https://ide.bitquery.io/arc-mainnet-docs-launchpads-ohlcv-for-a-launched-token)
-
-### Blocks & Validators
-
-#### Datasets and history on Arc
-
-On 16 September 2026, only the realtime path answered. Its depth changes, so measure the current window before running a long-range query.
-
-▶️ [Datasets and history on Arc](https://ide.bitquery.io/arc-mainnet-docs-overview-datasets-and-history)
-
-#### Latest blocks on Arc
-
-Change `query` to `subscription` and drop `limit` and `orderBy` to receive each block header as it is indexed.
-
-▶️ [Latest blocks on Arc](https://ide.bitquery.io/arc-mainnet-latest-blocks)
-
-#### Block by number on Arc
-
-Header, gas and transaction count of one Arc mainnet block.
-
-▶️ [Block by number on Arc](https://ide.bitquery.io/arc-mainnet-block-by-number)
-
-#### Block and throughput statistics on Arc
-
-Blocks, transactions, average transactions per block and average gas per block for each of the last 24 hours. Divide the block count by 3600 to get blocks per second.
-
-▶️ [Block and throughput statistics on Arc](https://ide.bitquery.io/arc-mainnet-block-statistics)
-
-## Bitcoin
-
-### Transfers
-
-#### Inflows and Outflows of a wallet
-
-This API returns all incoming and outgoing transactions for a specific Bitcoin wallet address.
-
-▶️ [Inflows and Outflows of a wallet](https://ide.bitquery.io/Inflows-and-Outflow-of-a-bitcoin-wallet)
-
-### Balances & Holders
-
-#### Balance of an address at a past date
-
-What one Bitcoin address held as of a chosen date. Move the date in the Variables pane.
-
-▶️ [Balance of an address at a past date](https://ide.bitquery.io/Bitcoin-Balance-of-an-address-at-a-past-date)
-
-#### Bitcoin Balance for multiple addresses
-
-This query calculates the combined balance of multiple Bitcoin wallet addresses by summing their total inflows and outflows: Balance = Total Output - Total Input. You can also set a date to get balances as of a specific point in time.
-
-▶️ [Bitcoin Balance for multiple addresses](https://ide.bitquery.io/BTC-balance-api-for-multiple-addresses)
-
-#### BTC balance api for multiple addresses
-
-Pass an array of addresses to `inputAddress` and `outputAddress` with `{in: [...]}` to get per-wallet totals in a single request. Useful for exchanges, custodians, and portfolio dashboards that monitor many wallets at once.
-
-▶️ [BTC balance api for multiple addresses](https://ide.bitquery.io/BTC-balance-API-for-multiple-addresses)
-
-#### Bitcoin balance
-
-Returns total BTC sent (inputs) and received (outputs) for an address, along with USD-equivalent values and first / last activity dates. Subtract `inputs.value` from `outputs.value` to get the current balance.
-
-▶️ [Bitcoin balance](https://ide.bitquery.io/Bitcoin-balance_5)
-
-#### Bitcoin balance at a given height
-
-Need to know what a wallet held at a particular point in time? The `height` filter caps inputs and outputs at a given block number, which is exactly what you need for audits, tax reporting, and point-in-time portfolio snapshots.
-
-▶️ [Bitcoin balance at a given height](https://ide.bitquery.io/bitcoin-balance-at-a-given-height)
-
-#### Bitcoin balance on a given block height
-
-Sum outputs and subtract inputs with a `height: {lteq: N}` cap to get the wallet's balance at a specific point on-chain. Useful for audits, tax snapshots, and point-in-time portfolio reporting.
-
-▶️ [Bitcoin balance on a given block height](https://ide.bitquery.io/bitcoin-balance-on-a-given-block-height)
-
-### Price & OHLC
-
-#### Latest Bitcoin price
-
-The current BTC price in USD from the [Crypto Price API](/docs/trading/crypto-price-api/currency). `bid:bitcoin` blends native BTC, WBTC, cbBTC and other wrapped versions across chains into one price, returned with USD volume and market cap.
-
-▶️ [Latest Bitcoin price](https://ide.bitquery.io/Latest-Bitcoin-Price-Trading-API)
-
-#### Latest Bitcoin price on each chain
-
-One latest USD price per BTC representation (WBTC on Ethereum, cbBTC on Base and so on) from the [Tokens cube](/docs/trading/crypto-price-api/tokens). Use it to spot a wrapped BTC trading away from the blended price.
-
-▶️ [Latest Bitcoin price on each chain](https://ide.bitquery.io/Latest-Bitcoin-Price-on-Each-Chain)
-
-#### Latest BTC/USDT price on every market
-
-The latest BTC/USDT price from each DEX market across chains, one row per market. Useful for comparing venues and finding arbitrage gaps.
-
-▶️ [Latest BTC/USDT price on every market](https://ide.bitquery.io/Find-arbitrage-opportunity-with-same-token-across-chains_1)
-
-#### Btc price in 2016
-
-Pulls the BTC/USD price implied by any output on a given date — Bitquery stores the spot value at the time of each transaction, so you can derive a historical price by dividing USD value by BTC value.
-
-▶️ [Btc price in 2016](https://ide.bitquery.io/btc-price-in-2016)
-
-### Transactions
-
-#### Details of Bitcoin Transaction
-
-This API provides comprehensive details of a specific Bitcoin transaction in a single query.
-
-▶️ [Details of Bitcoin Transaction](https://ide.bitquery.io/Details-of-Bitcoin-Transaction)
-
-### Blocks & Validators
-
-#### Bitcoin miners rewards
-
-Mining rewards live in coinbase outputs (the first transaction in every block, `txIndex: 0`) with `outputDirection: mining`.
-
-▶️ [Bitcoin miners rewards](https://ide.bitquery.io/bitcoin-miners-rewards)
-
-#### Get miners activity in a specific timeframe
-
-Pulls the activity count per miner address inside a date range. Drop or extend the date window to size the cohort however you need.
-
-▶️ [Get miners activity in a specific timeframe](https://ide.bitquery.io/get-miners-activity-in-a-specific-timeframe)
-
-#### Get miners first activity
-
-For a specific set of miner addresses, this query returns the first block each one mined. Useful for cohort analysis, miner onboarding studies, or building "first seen" timelines.
-
-▶️ [Get miners first activity](https://ide.bitquery.io/get-miners-first-activity)
+- [Litecoin](#litecoin)
+- [Bitcoin Cash](#bitcoin-cash)
+- [Dogecoin](#dogecoin)
+- [Dash](#dash)
+- [Zcash](#zcash)
+
+## Most Popular Queries
+
+The queries people open most, from Keyword.com search demand and Google Analytics IDE pageviews. Each links straight to a runnable query; streaming versions live in [starter-subscriptions.md](./starter-subscriptions.md).
+
+- **Solana — First buyers of a Pump.fun token (sniper detection)** — [open](https://ide.bitquery.io/Solana---First-buyers-of-a-Pumpfun-token-sniper-detection)
+- **Solana — PumpSwap latest trades** — [open](https://ide.bitquery.io/Pumpswap-latest-Trades-API)
+- **Solana — Swaps for a market address** — [open](https://ide.bitquery.io/swaps-for-a-market-address-on-Solana)
+- **Solana — Track token migrations to Raydium (realtime)** — [open](https://ide.bitquery.io/Track-Token-Migrations-to-Raydium-DEX-and-Raydium-CPMM-in-realtime)
+- **Robinhood Chain — Largest trades (24h, USD)** — [open](https://ide.bitquery.io/largest-swaps-robinhood-chain)
+- **Robinhood Chain — Stream chain trades** — [open](https://ide.bitquery.io/stream-robinhood-chain-trades)
+- **Robinhood Chain — Uniswap v4 pools** — [open](https://ide.bitquery.io/uniswap-v4-pools-on-robinhood-chain)
+- **Tokenized Stocks — Tesla xStock trades (realtime)** — [open](https://ide.bitquery.io/Tesla-stock-trades-stream)
+- **Polymarket — Latest prediction market trades** — [open](https://ide.bitquery.io/latest-prediction-market-trades_8)
+- **Hyperliquid — BTC perp trades** — [open](https://ide.bitquery.io/hyperliquid-btc-perp-trades)
+- **TRON — USDT TRC-20 transfers (stream)** — [open](https://ide.bitquery.io/usdt-trc20-transfers_1)
+- **TRON — Historical wallet balance** — [open](https://ide.bitquery.io/Historical-Tron-Wallet-Balance-for-a-currency)
+- **Bitcoin — Inflows & outflows of a wallet** — [open](https://ide.bitquery.io/Inflows-and-Outflow-of-a-bitcoin-wallet)
+- **Bitcoin — Transaction details** — [open](https://ide.bitquery.io/Details-of-Bitcoin-Transaction)
+- **Bitcoin — Stream price across chains** — [open](https://ide.bitquery.io/Stream-Bitcoin-Price-Across-Chains)
+- **Ethereum — ERC-20 transfers by wallet** — [open](https://ide.bitquery.io/Get-ERC20-token-transfers-by-wallet_7)
 
 ## Solana
 
@@ -1140,6 +703,78 @@ Top sellers of a letsbonk.fun token on launchpad. Uses the `DEXTradeByTokens` cu
 
 ▶️ [Top sellers of a letsbonk.fun token on launchpad](https://ide.bitquery.io/top-sellers-of-a-letsbonkfun-token-on-launchpad_1)
 
+### DEXScreener-style APIs
+
+Rebuild a DEXScreener-style view on Solana: pair trades, token price, OHLC candles and the top pairs, all from one API.
+
+#### Pair trades in real time (DEXScreener-style)
+
+Live trades for a single pair/market address, the core feed behind a DEXScreener-style page.
+
+▶️ [Pair trades in real time (DEXScreener-style)](https://ide.bitquery.io/Get-Solana-pair-trades-data-just-like-dexcsreener)
+
+#### Token price (Trading API)
+
+The latest USD price of a Solana token using the Trading API.
+
+▶️ [Token price (Trading API)](https://ide.bitquery.io/token-usd-price-using-trading-api_1)
+
+#### OHLC candles for a pair (1-hour)
+
+One-hour OHLC candles for a Solana token pair.
+
+▶️ [OHLC candles for a pair (1-hour)](https://ide.bitquery.io/ohlc-of-a-solana-token-pair-1-hour-interval)
+
+#### Top pairs on Solana (DEXScreener-style)
+
+The most active Solana pairs ranked for a DEXScreener-style listing.
+
+▶️ [Top pairs on Solana (DEXScreener-style)](https://ide.bitquery.io/Dexscreener--All-in-One-query_1)
+
+### GMGN
+
+GMGN-style trending, pair trades and top-pair feeds for Solana.
+
+#### GMGN trending tokens
+
+Trending Solana tokens, the GMGN-style discovery feed.
+
+▶️ [GMGN trending tokens](https://ide.bitquery.io/gmgn-trending-api_1)
+
+#### GMGN pair trades in real time
+
+Live trades for a specific pair, GMGN-style.
+
+▶️ [GMGN pair trades in real time](https://ide.bitquery.io/Get-Solana-pair-trades-data)
+
+#### GMGN top pairs on Solana
+
+Top traded pairs on Solana in one query.
+
+▶️ [GMGN top pairs on Solana](https://ide.bitquery.io/GMGN--All-in-One-query_1)
+
+### Photon
+
+Trades routed through the Photon trading client on Solana.
+
+#### Latest trades routed via Photon
+
+The newest trades executed through Photon.
+
+▶️ [Latest trades routed via Photon](https://ide.bitquery.io/Trades-Executed-on-Photon)
+
+#### Photon trades for a pair
+
+Photon-routed trades for one pair/market.
+
+▶️ [Photon trades for a pair](https://ide.bitquery.io/Trades-of-a-Pair-Executed-on-Photon)
+
+#### Top traders by PnL for a pool (last 30 minutes)
+
+Wallets ranked by realised PnL on a specific pool over the last 30 minutes.
+
+▶️ [Top traders by PnL for a pool (last 30 minutes)](https://ide.bitquery.io/Top-Traders-by-PnL-of-a-specific-pair)
+
 ## Robinhood Chain
 
 ### Trades
@@ -1389,6 +1024,66 @@ Uniswap v4 Hooks in Use on Robinhood Chain. Uses the `Events` cube. Replace the 
 Three realtime cubes carry data traders usually have to compute themselves. All three are realtime-only on Robinhood — `dataset: archive` and `dataset: combined` both error — so use them for live monitoring and persist what you need.
 
 ▶️ [Uniswap v4 Pool Liquidity on Robinhood Chain (pools.trade)](https://ide.bitquery.io/Pools-trade-Live-pool-liquidity)
+
+### Pons launchpad
+
+Pons is a token launchpad on Robinhood Chain. Its launches, trades and holders surface through the Robinhood Chain launch and trade feeds below — filter the launch contract to isolate Pons tokens. For Pons-specific examples see the [Pons API docs](https://docs.bitquery.io/docs/blockchain/robinhood/pons-api/).
+
+#### Latest Pons / Robinhood Chain launches
+
+One row per launch from the decoded `TokenCreated` event on the entry contracts — the cleanest launch feed for Pons tokens.
+
+▶️ [Latest Pons / Robinhood Chain launches](https://ide.bitquery.io/Pools-trade-Latest-launches)
+
+#### Pons / Crowd Launch auction bids
+
+The launch transaction links token mint, creator and the auction's first bid events, so one hash ties a Pons launch together.
+
+▶️ [Pons / Crowd Launch auction bids](https://ide.bitquery.io/Pools-trade-Crowd-Launch-bids)
+
+#### Most active launch creators on Robinhood Chain
+
+Wallets minting the most tokens — useful for spotting the busiest Pons deployers and spam bots.
+
+▶️ [Most active launch creators on Robinhood Chain](https://ide.bitquery.io/Pools-trade-Most-active-token-creators)
+
+## Tokenized Stocks
+
+Tokenized equities (xStocks) trade on Solana as SPL tokens against USDC and SOL. Use the token mint to pull trades, price, OHLC and holders exactly like any other Solana token.
+
+### Price & OHLC
+
+#### Latest price of the Apple xStock
+
+The newest USD price for the Apple xStock (AAPLx) from its top market.
+
+▶️ [Latest price of the Apple xStock](https://ide.bitquery.io/Apple-xStock-latest-price)
+
+#### Tesla xStock OHLCV candles
+
+OHLCV candles for the Tesla xStock (TSLAx) for charting.
+
+▶️ [Tesla xStock OHLCV candles](https://ide.bitquery.io/Tslax-OHLCV)
+
+### Trades
+
+#### Tesla xStock trades in real time
+
+Live trades of the Tesla xStock as they settle on Solana DEXs.
+
+▶️ [Tesla xStock trades in real time](https://ide.bitquery.io/Tesla-stock-trades-stream)
+
+#### Top traders of the Apple xStock
+
+Wallets ranked by traded volume on the Apple xStock.
+
+▶️ [Top traders of the Apple xStock](https://ide.bitquery.io/Top-traders-of-Apple-on-xStocks)
+
+#### Buy / sell volume of the Meta xStock per pool
+
+Trading volume split into buy and sell volume for the Meta xStock, per pool.
+
+▶️ [Buy / sell volume of the Meta xStock per pool](https://ide.bitquery.io/trading-volume-buy-volume-sell-volume-of-the-Meta-xStock-per-pool)
 
 ## Polymarket
 
@@ -1922,53 +1617,107 @@ This query allows you to track `TokenPurchased` events on SunPump. It retrieves 
 
 ▶️ [TokenPurchased on Sunpump](https://ide.bitquery.io/TokenPurchased-on-Sunpump)
 
-## Cross-Chain
+## Bitcoin
 
-### Trades
+### Transfers
 
-#### Volume of Multiple Tokens Across Different Chains
+#### Inflows and Outflows of a wallet
 
-Get volume and price change data for multiple tokens trading on different chains (Solana, Ethereum, BSC, Tron) in a single query. Returns volume for 1h, 4h, and 24h periods, plus price change percentages. > **Note:** For EVM chains (Ethereum, BSC, etc.) in the Trading API, use **all lowercase…
+This API returns all incoming and outgoing transactions for a specific Bitcoin wallet address.
 
-▶️ [Volume of Multiple Tokens Across Different Chains](https://ide.bitquery.io/volume-of-a-token_2)
+▶️ [Inflows and Outflows of a wallet](https://ide.bitquery.io/Inflows-and-Outflow-of-a-bitcoin-wallet)
+
+### Balances & Holders
+
+#### Balance of an address at a past date
+
+What one Bitcoin address held as of a chosen date. Move the date in the Variables pane.
+
+▶️ [Balance of an address at a past date](https://ide.bitquery.io/Bitcoin-Balance-of-an-address-at-a-past-date)
+
+#### Bitcoin Balance for multiple addresses
+
+This query calculates the combined balance of multiple Bitcoin wallet addresses by summing their total inflows and outflows: Balance = Total Output - Total Input. You can also set a date to get balances as of a specific point in time.
+
+▶️ [Bitcoin Balance for multiple addresses](https://ide.bitquery.io/BTC-balance-api-for-multiple-addresses)
+
+#### BTC balance api for multiple addresses
+
+Pass an array of addresses to `inputAddress` and `outputAddress` with `{in: [...]}` to get per-wallet totals in a single request. Useful for exchanges, custodians, and portfolio dashboards that monitor many wallets at once.
+
+▶️ [BTC balance api for multiple addresses](https://ide.bitquery.io/BTC-balance-API-for-multiple-addresses)
+
+#### Bitcoin balance
+
+Returns total BTC sent (inputs) and received (outputs) for an address, along with USD-equivalent values and first / last activity dates. Subtract `inputs.value` from `outputs.value` to get the current balance.
+
+▶️ [Bitcoin balance](https://ide.bitquery.io/Bitcoin-balance_5)
+
+#### Bitcoin balance at a given height
+
+Need to know what a wallet held at a particular point in time? The `height` filter caps inputs and outputs at a given block number, which is exactly what you need for audits, tax reporting, and point-in-time portfolio snapshots.
+
+▶️ [Bitcoin balance at a given height](https://ide.bitquery.io/bitcoin-balance-at-a-given-height)
+
+#### Bitcoin balance on a given block height
+
+Sum outputs and subtract inputs with a `height: {lteq: N}` cap to get the wallet's balance at a specific point on-chain. Useful for audits, tax snapshots, and point-in-time portfolio reporting.
+
+▶️ [Bitcoin balance on a given block height](https://ide.bitquery.io/bitcoin-balance-on-a-given-block-height)
 
 ### Price & OHLC
 
-#### SMA and Volume Data (for past 28, 14 and 7 Days Time)
+#### Latest Bitcoin price
 
-Use this API to get SMA and volume over the past 28 days, with 14 days, and 7 days breakdowns. Note that the oldest possible data it could return is 30 days ago. Trading cube — real-time and roughly the last 30 days. For anything older, use the DEXTradeByTokens entries at the bottom of this section.
+The current BTC price in USD from the [Crypto Price API](/docs/trading/crypto-price-api/currency). `bid:bitcoin` blends native BTC, WBTC, cbBTC and other wrapped versions across chains into one price, returned with USD volume and market cap.
 
-▶️ [SMA and Volume Data (for past 28, 14 and 7 Days Time)](https://ide.bitquery.io/multiple-tokens-volume-and-SMA)
+▶️ [Latest Bitcoin price](https://ide.bitquery.io/Latest-Bitcoin-Price-Trading-API)
 
-#### Historical OHLC of a Token Pair Across Chains
+#### Latest Bitcoin price on each chain
 
-This query fetches historical OHLC (Open, High, Low, Close) price data for a token pair across different blockchains for as long back as 30 days. For **native tokens**, you only need to specify their ID (e.g., `bid:eth` for ETH). Trading cube — real-time and roughly the last 30 days. For anything older, use the DEXTradeByTokens entries at the bottom of this section.
+One latest USD price per BTC representation (WBTC on Ethereum, cbBTC on Base and so on) from the [Tokens cube](/docs/trading/crypto-price-api/tokens). Use it to spot a wrapped BTC trading away from the blended price.
 
-▶️ [Historical OHLC of a Token Pair Across Chains](https://ide.bitquery.io/Historical-Token-OHLC-Multi-Chains_1)
+▶️ [Latest Bitcoin price on each chain](https://ide.bitquery.io/Latest-Bitcoin-Price-on-Each-Chain)
 
-#### Latest Price of Any Token
+#### Latest BTC/USDT price on every market
 
-This query gives you bitcoin currency 1-sec OHLC across different blockchains. You can adjust duration in `Duration: {eq: 1}` filter. Trading cube — real-time and roughly the last 30 days. For anything older, use the DEXTradeByTokens entries at the bottom of this section.
+The latest BTC/USDT price from each DEX market across chains, one row per market. Useful for comparing venues and finding arbitrage gaps.
 
-▶️ [Latest Price of Any Token](https://ide.bitquery.io/Latest-bitcoin-price-on-across-chains_5)
+▶️ [Latest BTC/USDT price on every market](https://ide.bitquery.io/Find-arbitrage-opportunity-with-same-token-across-chains_1)
 
-#### OHLC of a currency on multiple blockchains
+#### Btc price in 2016
 
-This query retrieves the OHLC (Open, High, Low, Close) prices of a currency(in this eg Bitcoin; it will include all sorts of currencies whose underlying asset is Bitcoin like cbBTC, WBTC, etc) across all supported blockchains, aggregated into a given time interval (e.g., 60 seconds in this example). Trading cube — real-time and roughly the last 30 days. For anything older, use the DEXTradeByTokens entries at the bottom of this section.
+Pulls the BTC/USD price implied by any output on a given date — Bitquery stores the spot value at the time of each transaction, so you can derive a historical price by dividing USD value by BTC value.
 
-▶️ [OHLC of a currency on multiple blockchains](https://ide.bitquery.io/OHLC-of-a-currency-on-multiple-blockchains_2)
+▶️ [Btc price in 2016](https://ide.bitquery.io/btc-price-in-2016)
 
-#### Historical Price and Volume Data for a Token Pair beyond 30 days
+### Transactions
 
-Use this API to get historical price and volume for a specific token pair address on a specific network for the time window beyond the 30 days. Trading cube — real-time and roughly the last 30 days. For anything older, use the DEXTradeByTokens entries at the bottom of this section.
+#### Details of Bitcoin Transaction
 
-▶️ [Historical Price and Volume Data for a Token Pair beyond 30 days](https://ide.bitquery.io/historical-price-and-historical-volume)
+This API provides comprehensive details of a specific Bitcoin transaction in a single query.
 
-#### All time High Trade Price for a Token — historical (beyond 30 days)
+▶️ [Details of Bitcoin Transaction](https://ide.bitquery.io/Details-of-Bitcoin-Transaction)
 
-Retrieves the all-time high (ATH) price in USD for a specified token contract. All time high price could lie beyond the 30 days window provided by Trading API, hence we use these network specific APIs to get the ATH for a token. While this provides the option to go beyond the 30 days time…. Built from raw DEX trades, so it reaches back further than the Trading cube's ~30 days. For live prices prefer the Trading cube entries at the top of this section.
+### Blocks & Validators
 
-▶️ [All time High Trade Price for a Token — historical (beyond 30 days)](https://ide.bitquery.io/ATH-of-eth-token_1)
+#### Bitcoin miners rewards
+
+Mining rewards live in coinbase outputs (the first transaction in every block, `txIndex: 0`) with `outputDirection: mining`.
+
+▶️ [Bitcoin miners rewards](https://ide.bitquery.io/bitcoin-miners-rewards)
+
+#### Get miners activity in a specific timeframe
+
+Pulls the activity count per miner address inside a date range. Drop or extend the date window to size the cohort however you need.
+
+▶️ [Get miners activity in a specific timeframe](https://ide.bitquery.io/get-miners-activity-in-a-specific-timeframe)
+
+#### Get miners first activity
+
+For a specific set of miner addresses, this query returns the first block each one mined. Useful for cohort analysis, miner onboarding studies, or building "first seen" timelines.
+
+▶️ [Get miners first activity](https://ide.bitquery.io/get-miners-first-activity)
 
 ## Ethereum
 
@@ -3616,6 +3365,502 @@ Filter withdraw activity for a single gauge pool. Useful for monitoring liquidit
 
 ▶️ [Latest Aerodrome Finance: CL100-WETH/VVV Pool Gauge withdraw transactions](https://ide.bitquery.io/latest-Aerodrome-Finance-CL100-WETHVVV-Pool-Gauge-withdraw-transactions_1)
 
+## Cross-Chain
+
+### Trades
+
+#### Volume of Multiple Tokens Across Different Chains
+
+Get volume and price change data for multiple tokens trading on different chains (Solana, Ethereum, BSC, Tron) in a single query. Returns volume for 1h, 4h, and 24h periods, plus price change percentages. > **Note:** For EVM chains (Ethereum, BSC, etc.) in the Trading API, use **all lowercase…
+
+▶️ [Volume of Multiple Tokens Across Different Chains](https://ide.bitquery.io/volume-of-a-token_2)
+
+### Price & OHLC
+
+#### SMA and Volume Data (for past 28, 14 and 7 Days Time)
+
+Use this API to get SMA and volume over the past 28 days, with 14 days, and 7 days breakdowns. Note that the oldest possible data it could return is 30 days ago. Trading cube — real-time and roughly the last 30 days. For anything older, use the DEXTradeByTokens entries at the bottom of this section.
+
+▶️ [SMA and Volume Data (for past 28, 14 and 7 Days Time)](https://ide.bitquery.io/multiple-tokens-volume-and-SMA)
+
+#### Historical OHLC of a Token Pair Across Chains
+
+This query fetches historical OHLC (Open, High, Low, Close) price data for a token pair across different blockchains for as long back as 30 days. For **native tokens**, you only need to specify their ID (e.g., `bid:eth` for ETH). Trading cube — real-time and roughly the last 30 days. For anything older, use the DEXTradeByTokens entries at the bottom of this section.
+
+▶️ [Historical OHLC of a Token Pair Across Chains](https://ide.bitquery.io/Historical-Token-OHLC-Multi-Chains_1)
+
+#### Latest Price of Any Token
+
+This query gives you bitcoin currency 1-sec OHLC across different blockchains. You can adjust duration in `Duration: {eq: 1}` filter. Trading cube — real-time and roughly the last 30 days. For anything older, use the DEXTradeByTokens entries at the bottom of this section.
+
+▶️ [Latest Price of Any Token](https://ide.bitquery.io/Latest-bitcoin-price-on-across-chains_5)
+
+#### OHLC of a currency on multiple blockchains
+
+This query retrieves the OHLC (Open, High, Low, Close) prices of a currency(in this eg Bitcoin; it will include all sorts of currencies whose underlying asset is Bitcoin like cbBTC, WBTC, etc) across all supported blockchains, aggregated into a given time interval (e.g., 60 seconds in this example). Trading cube — real-time and roughly the last 30 days. For anything older, use the DEXTradeByTokens entries at the bottom of this section.
+
+▶️ [OHLC of a currency on multiple blockchains](https://ide.bitquery.io/OHLC-of-a-currency-on-multiple-blockchains_2)
+
+#### Historical Price and Volume Data for a Token Pair beyond 30 days
+
+Use this API to get historical price and volume for a specific token pair address on a specific network for the time window beyond the 30 days. Trading cube — real-time and roughly the last 30 days. For anything older, use the DEXTradeByTokens entries at the bottom of this section.
+
+▶️ [Historical Price and Volume Data for a Token Pair beyond 30 days](https://ide.bitquery.io/historical-price-and-historical-volume)
+
+#### All time High Trade Price for a Token — historical (beyond 30 days)
+
+Retrieves the all-time high (ATH) price in USD for a specified token contract. All time high price could lie beyond the 30 days window provided by Trading API, hence we use these network specific APIs to get the ATH for a token. While this provides the option to go beyond the 30 days time…. Built from raw DEX trades, so it reaches back further than the Trading cube's ~30 days. For live prices prefer the Trading cube entries at the top of this section.
+
+▶️ [All time High Trade Price for a Token — historical (beyond 30 days)](https://ide.bitquery.io/ATH-of-eth-token_1)
+
+## Trading API
+
+### Trades
+
+#### Average fee per trade, Total fees, total volume, trades count per DEX program
+
+Average fee per trade, Total fees, total volume, trades count per DEX program. Uses the `Trades` cube.
+
+▶️ [Average fee per trade, Total fees, total volume, trades count per DEX program](https://ide.bitquery.io/Average-fee-per-trade-Total-fees-total-volume-trades-count-per-DEX-program)
+
+#### Last 10 WSOL USDC Token pair trades
+
+Last 10 WSOL USDC Token pair trades. Uses the `Trades` cube.
+
+▶️ [Last 10 WSOL USDC Token pair trades](https://ide.bitquery.io/Last-10-WSOL-USDC-Token-pair-trades)
+
+#### Most active market pools by trades
+
+Most active market pools by trades. Uses the `Trades` cube.
+
+▶️ [Most active market pools by trades](https://ide.bitquery.io/Most-active-market-pools-by-trades)
+
+#### Most active traders by trade count
+
+Most active traders by trade count. Uses the `Trades` cube.
+
+▶️ [Most active traders by trade count](https://ide.bitquery.io/Most-active-traders-by-trade-count)
+
+#### Most traded token in last 1 hour on solana and it's average trade amount and total volume
+
+Most traded token in last 1 hour on solana and it's average trade amount and total volume. Uses the `Trades` cube.
+
+▶️ [Most traded token in last 1 hour on solana and it's average trade amount and total volume](https://ide.bitquery.io/Most-traded-token-in-last-1-hour-on-solana-and-its-average-trade-amount-and-total-volume)
+
+#### Net flow (buys - sells) per token symbol
+
+Net flow (buys - sells) per token symbol. Uses the `Trades` cube.
+
+▶️ [Net flow (buys - sells) per token symbol](https://ide.bitquery.io/Net-flow-buys---sells-per-token-symbol_2)
+
+#### Tokens with highest trade frequency
+
+Tokens with highest trade frequency. Uses the `Trades` cube.
+
+▶️ [Tokens with highest trade frequency](https://ide.bitquery.io/Tokens-with-highest-trade-frequency)
+
+#### Tokens with most unique buyers
+
+Tokens with most unique buyers. Uses the `Trades` cube.
+
+▶️ [Tokens with most unique buyers](https://ide.bitquery.io/Tokens-with-most-unique-buyers)
+
+#### Top Traders on Solana
+
+Top Traders on Solana. Uses the `Trades` cube.
+
+▶️ [Top Traders on Solana](https://ide.bitquery.io/Top-Traders-on-Solana_2)
+
+#### Total SOL fees, Total Volume, Total count trades
+
+Total SOL fees, Total Volume, Total count trades. Uses the `Trades` cube.
+
+▶️ [Total SOL fees, Total Volume, Total count trades](https://ide.bitquery.io/Total-SOL-fees-Total-Volume-Total-count-trades)
+
+### Price & OHLC
+
+#### Token price from top market (rank 1)
+
+The recommended way to price one token: takes the single highest-ranked market for it rather than blending every pool. Prices the token from its single top market rather than blending every pool, which is what you want for one specific token.
+
+▶️ [Token price from top market (rank 1)](https://ide.bitquery.io/Token-price-from-top-market--rank-1_2)
+
+#### Multi-token watchlist, top market each
+
+Prices a list of tokens, each from its own top market. Add or remove addresses in the `Token.Address.in` filter.
+
+▶️ [Multi-token watchlist, top market each](https://ide.bitquery.io/Multi-token-watchlist--rank-1-per-token)
+
+#### Historical Bitcoin OHLC data for the last 7 days
+
+Recent Bitcoin OHLC using the Crypto Price API (time range in the query matches what the Price Index supports).
+
+▶️ [Historical Bitcoin OHLC data for the last 7 days](https://ide.bitquery.io/historical-Bitcoin-OHLC-data-for-the-last-7-days)
+
+#### OHLC of a currency on multiple blockchains
+
+Stream real-time Bitcoin OHLC data aggregated from all supported blockchains (Bitcoin, Ethereum WBTC, Solana, etc.) with 60-second intervals.
+
+▶️ [OHLC of a currency on multiple blockchains](https://ide.bitquery.io/OHLC-of-a-currency-on-multiple-blockchains)
+
+### Supply & Market Cap
+
+#### Marketcap of pump token
+
+Set token address and read `Supply.MarketCap` from the query below. See the Supply fields reference for related supply fields. You can also stream this in real-time by adding the keyword "subscription" at the top.
+
+▶️ [Marketcap of pump token](https://ide.bitquery.io/marketcap-of-pump-token)
+
+#### Tokens ranked by market cap
+
+Tokens ranked by market cap. Uses the `Trades` cube.
+
+▶️ [Tokens ranked by market cap](https://ide.bitquery.io/Tokens-ranked-by-market-cap_1)
+
+## Stablecoins
+
+### Trades
+
+#### Solana USDT trades query
+
+Solana trades quoted in USDT. USDT is the quote side on Solana, so it is filtered with `Pair.QuoteToken`, not `Pair.Token`, which would return nothing. The Trading cube reaches back about 30 days; `Solana.DEXTrades` keeps about 12 hours.
+
+▶️ [Solana USDT trades query](https://ide.bitquery.io/solana-USDT-trades-query)
+
+### Transfers
+
+#### Latest Tron USDT Transfers
+
+Listen to stablecoin payments across all major blockchains. The Mempool option lets you detect a payment *before* it is confirmed — useful for instant merchant UX.
+
+▶️ [Latest Tron USDT Transfers](https://ide.bitquery.io/Latest-Tron-USDT-Transfers)
+
+#### Latest USDT/USDC Transfer api on base
+
+Listen to stablecoin payments across all major blockchains. The Mempool option lets you detect a payment *before* it is confirmed — useful for instant merchant UX.
+
+▶️ [Latest USDT/USDC Transfer api on base](https://ide.bitquery.io/Latest-USDTUSDC-Transfer-api-on-base)
+
+#### Latest USDT/USDC Transfer api on ethereum
+
+Listen to stablecoin payments across all major blockchains. The Mempool option lets you detect a payment *before* it is confirmed — useful for instant merchant UX.
+
+▶️ [Latest USDT/USDC Transfer api on ethereum](https://ide.bitquery.io/Latest-USDTUSDC-Transfer-api-on-ethereum)
+
+#### Stablecoin Transfers from/to an address
+
+Stablecoin Transfers from/to an address. Uses the `Transfers` cube. Change the token address in the `where` clause to use it.
+
+▶️ [Stablecoin Transfers from/to an address](https://ide.bitquery.io/stablecoin-Transfers-fromto-an-address)
+
+#### Stablecoin recieved and sent by an address
+
+Stablecoin recieved and sent by an address. Uses the `Transfers` cube. Change the token address in the `where` clause to use it. Needs the historical data add-on — see the comment at the top of the query.
+
+▶️ [Stablecoin recieved and sent by an address](https://ide.bitquery.io/Stablecoin-recieved-and-sent-by-an-address)
+
+#### USDT Stablecoin reserves on Ethereum
+
+USDT Stablecoin reserves on Ethereum. Uses the `Transfers` cube. Change the token address in the `where` clause to use it. Needs the historical data add-on — see the comment at the top of the query.
+
+▶️ [USDT Stablecoin reserves on Ethereum](https://ide.bitquery.io/USDT-Stablecoin-reserves-on-Ethereum)
+
+#### USDT and USDC token Transfers api on solana
+
+USDT and USDC token Transfers api on solana. Uses the `Transfers` cube.
+
+▶️ [USDT and USDC token Transfers api on solana](https://ide.bitquery.io/USDT-and-USDC-token-Transfers-api-on-solana)
+
+#### USDT token Transfers api on solana
+
+Track live USDT stablecoin transfers. USDT is ideal for payments, settlements, etc and you can track those in real-time using this API/Stream -.
+
+▶️ [USDT token Transfers api on solana](https://ide.bitquery.io/USDT-token-Transfers-api-on-solana)
+
+### Price & OHLC
+
+#### 5 minute price change stablecoin API
+
+5 minute price change stablecoin API. Uses the `Tokens` cube.
+
+▶️ [5 minute price change stablecoin API](https://ide.bitquery.io/5-minute-price-change-stablecoin-API)
+
+#### Stablecoin price query of USDT
+
+Get real-time and historical USDT prices, OHLCV, and moving averages across supported networks and markets.
+
+▶️ [Stablecoin price query of USDT](https://ide.bitquery.io/stablecoin-price-query-of-USDT_1)
+
+#### Usdt latest price arbitrage
+
+This query compares USDT prices across different blockchain networks in real-time. It fetches the latest price data for USDT from different networks, showing you where the same stablecoin trades at different prices.
+
+▶️ [Usdt latest price arbitrage](https://ide.bitquery.io/usdt-latest-price-arbitrage)
+
+### Supply & Market Cap
+
+#### USDC Stablecoin reserves on Solana
+
+USDC Stablecoin reserves on Solana. Uses the `TokenSupplyUpdates` cube. Change the token address in the `where` clause to use it.
+
+▶️ [USDC Stablecoin reserves on Solana](https://ide.bitquery.io/USDC-Stablecoin-reserves-on-Solana)
+
+#### USDT Stablecoin reserves on Solana query
+
+USDT Stablecoin reserves on Solana query. Uses the `TokenSupplyUpdates` cube. Change the token address in the `where` clause to use it.
+
+▶️ [USDT Stablecoin reserves on Solana query](https://ide.bitquery.io/USDT-Stablecoin-reserves-on-Solana--query)
+
+## NFTs
+
+### Trades
+
+#### New Uniswap v3 liquidity positions
+
+Position NFTs as they are minted — who is adding liquidity to v3 pools, and to which pair.
+
+▶️ [New Uniswap v3 liquidity positions](https://ide.bitquery.io/recent-uniswap-position-NFTs-mint_1)
+
+#### Get NFT trades for a specific NFT contract on specific marketplace
+
+Get trades of NFTs for a given contract and marketplace. Built from raw DEX trades, so it reaches back further than the Trading cube's ~30 days. For live prices prefer the Trading cube entries at the top of this section.
+
+▶️ [Get NFT trades for a specific NFT contract on specific marketplace](https://ide.bitquery.io/Get-NFT-trades-by-contract)
+
+#### Get NFT trades for a specific NFT contract and token ID
+
+Get trades of NFTs for a given contract and token ID. Built from raw DEX trades, so it reaches back further than the Trading cube's ~30 days. For live prices prefer the Trading cube entries at the top of this section.
+
+▶️ [Get NFT trades for a specific NFT contract and token ID](https://ide.bitquery.io/Get-NFT-trades-by-token)
+
+#### Get NFT trades by wallet
+
+Get trades of NFTs for a given wallet. Built from raw DEX trades, so it reaches back further than the Trading cube's ~30 days. For live prices prefer the Trading cube entries at the top of this section.
+
+▶️ [Get NFT trades by wallet](https://ide.bitquery.io/Get-trades-of-NFTs-for-a-given-wallet)
+
+#### Latest NFT Trades
+
+Latest NFT Trades. Built from raw DEX trades, so it reaches back further than the Trading cube's ~30 days. For live prices prefer the Trading cube entries at the top of this section.
+
+▶️ [Latest NFT Trades](https://ide.bitquery.io/Latest-NFT-trades-on-ETH)
+
+#### Top Traded NFTs in a Period
+
+This query gets the top 10 traded NFTs based on the number of trades within a specified date range. You can change the filters such as the date range and limit. Built from raw DEX trades, so it reaches back further than the Trading cube's ~30 days. For live prices prefer the Trading cube entries at the top of this section.
+
+▶️ [Top Traded NFTs in a Period](https://ide.bitquery.io/Top-traded-NFT-tokens-in-a-month)
+
+#### Latests OpenSea Trades
+
+Latests OpenSea Trades. Built from raw DEX trades, so it reaches back further than the Trading cube's ~30 days. For live prices prefer the Trading cube entries at the top of this section.
+
+▶️ [Latests OpenSea Trades](https://ide.bitquery.io/Latests-OpenSea-Trades)
+
+#### Latest NFT trades on Ethereum network
+
+Latest NFT trades on Ethereum network. Built from raw DEX trades, so it reaches back further than the Trading cube's ~30 days. For live prices prefer the Trading cube entries at the top of this section.
+
+▶️ [Latest NFT trades on Ethereum network](https://ide.bitquery.io/latest-NFT-trades-on-Ethereum-network)
+
+#### Pairs of blur token new dataset
+
+Open the above query on GraphQL IDE using this. Built from raw DEX trades, so it reaches back further than the Trading cube's ~30 days. For live prices prefer the Trading cube entries at the top of this section.
+
+▶️ [Pairs of blur token new dataset](https://ide.bitquery.io/pairs-of-blur-token-new-dataset_1)
+
+#### NFT currencies on Solana by DEX'es
+
+The subscription query provided fetches the most-traded NFTs in the last few hours. For Solana, only realtime information is available, so the aggregate might not be accurate beyond a few hours. Built from raw DEX trades, so it reaches back further than the Trading cube's ~30 days. For live prices prefer the Trading cube entries at the top of this section.
+
+▶️ [NFT currencies on Solana by DEX'es](https://ide.bitquery.io/NFT-currencies-on-Solana-by-DEXes_1)
+
+### Transfers
+
+#### Get NFT transfers by wallet
+
+Get transfers of NFTs given the wallet.
+
+▶️ [Get NFT transfers by wallet](https://ide.bitquery.io/latest-nft-transfers-by-a-user)
+
+#### All transfers of an NFT
+
+Retrieves the most recent transfers of a specific non-fungible token (NFT) on the Ethereum network. You can find the GraphQL query.
+
+▶️ [All transfers of an NFT](https://ide.bitquery.io/All-transfers-of-an-NFT)
+
+#### NFT Token Transfers By Date
+
+NFT Token Transfers By Date.
+
+▶️ [NFT Token Transfers By Date](https://ide.bitquery.io/NFT-Token-Transfers-By-Date)
+
+#### Top transfered NFT tokens in network
+
+Fetches the most frequently transferred NFTs on the Ethereum Blockchain within the specified date range.
+
+▶️ [Top transfered NFT tokens in network](https://ide.bitquery.io/Top-transfered-NFT-tokens-in-network)
+
+#### Array_intersect example for NFT
+
+Array_intersect example for NFT.
+
+▶️ [Array_intersect example for NFT](https://ide.bitquery.io/array_intersect-example-for-NFT)
+
+#### Get all transfers of a specific nft
+
+Will give all the transfers of a particular NFT `0xb68CA010776B4584cf49893E75b66583eb884948`.
+
+▶️ [Get all transfers of a specific nft](https://ide.bitquery.io/get-all-transfers-of-a-specific-nft)
+
+### Balances & Holders
+
+#### Get Latest NFT Balance for an Address
+
+Get the latest NFT balance for a specific address and NFT collection. This query returns the current NFT count and ownership information.
+
+▶️ [Get Latest NFT Balance for an Address](https://ide.bitquery.io/Get-Latest-NFT-Balance-for-an-Address)
+
+#### Get All NFT Collections for an Address
+
+Retrieve all NFT collections held by a specific address. This query returns balances for all NFT collections the address owns.
+
+▶️ [Get All NFT Collections for an Address](https://ide.bitquery.io/Get-All-NFT-Collections-for-an-Address_1)
+
+#### Get NFT Owner for Specific Token ID
+
+Check the current owner of a specific NFT token ID. This query returns ownership information for a particular token.
+
+▶️ [Get NFT Owner for Specific Token ID](https://ide.bitquery.io/Get-NFT-Owner-for-Specific-Token-ID)
+
+#### Get NFT Balances for Multiple Addresses
+
+Get NFT balances for multiple addresses in a single query. Useful for portfolio tracking or wallet monitoring applications.
+
+▶️ [Get NFT Balances for Multiple Addresses](https://ide.bitquery.io/Get-NFT-Balances-for-Multiple-Addresses_1)
+
+#### Get NFT Ownership History
+
+Retrieve the NFT ownership history of a specific NFT over a specific time period. This helps track NFT transfers and ownership changes.
+
+▶️ [Get NFT Ownership History](https://ide.bitquery.io/Get-NFT-Ownership-History_2)
+
+### Price & OHLC
+
+#### Smart contract calls to an nft contract
+
+Smart contract calls to an nft contract.
+
+▶️ [Smart contract calls to an nft contract](https://ide.bitquery.io/Smart-contract-calls-to-an-nft-contract)
+
+### Events & Calls
+
+#### All refinance loans for specific NFT collection
+
+To retrieve all refinance loans for a specific NFT collection, we filter Refinance event arguments in.
+
+▶️ [All refinance loans for specific NFT collection](https://ide.bitquery.io/All-refinance-loans-for-specificNFT-collection)
+
+#### Auction on blur marketplace
+
+The 'StartAuction' event is triggered when an NFT auction starts on the Blur : Blend Contract. The following.
+
+▶️ [Auction on blur marketplace](https://ide.bitquery.io/Auction-on-blur-marketplace)
+
+#### Creator_of_an_NFT
+
+Creator_of_an_NFT.
+
+▶️ [Creator_of_an_NFT](https://ide.bitquery.io/Creator_of_an_NFT)
+
+#### Latest Cancelled offers on Blur NFT marketplace
+
+On the BLUR market, the 'OfferCancelled' event initiates when an offer is withdrawn or cancelled. The following.
+
+▶️ [Latest Cancelled offers on Blur NFT marketplace](https://ide.bitquery.io/Latest-Cancelled-offers-on-Blur-NFT-marketplace)
+
+#### Latest Loans for a specific borrower on Blur marketplace
+
+Same as previous queries, this query will return details about the block, transaction, log, and arguments. By modifying the 'Arguments.includes' filter, you can track loan activities for different NFT collections on the Blur marketplace.
+
+▶️ [Latest Loans for a specific borrower on Blur marketplace](https://ide.bitquery.io/Latest-Loans-for-a-specificborrower-on-Blur-marketplace)
+
+#### Latest Seized NFTs on Blur marketplace
+
+When a seizure event happens, control of the NFT shifts to the lender or an enforcing third party. The.
+
+▶️ [Latest Seized NFTs on Blur marketplace](https://ide.bitquery.io/Latest-Seized-NFTs-on-Blur-marketplace)
+
+#### Latest loans for specific NFT token
+
+Latest loans for specific NFT token.
+
+▶️ [Latest loans for specific NFT token](https://ide.bitquery.io/Latest-loans-for-specific-NFTtoken)
+
+#### Loan history for specific NFT ID
+
+Loan history for specific NFT ID.
+
+▶️ [Loan history for specific NFT ID](https://ide.bitquery.io/Loan-history-for-specific-NFTID)
+
+#### Loan repayment of blur marketplace
+
+For loan repayment transactions on the BLUR market, use the.
+
+▶️ [Loan repayment of blur marketplace](https://ide.bitquery.io/Loan-repayment-of-blur-marketplace)
+
+#### Loans above a specific amount on the Blur NFT marketplace
+
+If we want to track loans above a specific amount on the Blur marketplace, we can use the following.
+
+▶️ [Loans above a specific amount on the Blur NFT marketplace](https://ide.bitquery.io/Loans-above-a-specific-amount-on-the-Blur-NFT-marketplace)
+
+#### Locked NFT bought on Blur marketplace
+
+Locked NFTs are temporarily non-transferrable and can be traded or transferred after the lock period. These NFTs are often cheaper than non-locked. The following.
+
+▶️ [Locked NFT bought on Blur marketplace](https://ide.bitquery.io/Locked-NFT-bought-on-Blur-marketplace)
+
+## Futures DEXs
+
+### Trades
+
+#### All events of AsterDEX
+
+Monitor all events emitted by the AsterDEX contract to track all platform activities.
+
+▶️ [All events of AsterDEX](https://ide.bitquery.io/All-events-of-AsterDEX)
+
+#### AsterDEX - All latest Liquidations
+
+When there is a liquidation event on AsterDEX, it emits `ExecuteCloseSuccessful` event with `executionType` 2.
+
+▶️ [AsterDEX - All latest Liquidations](https://ide.bitquery.io/AsterDEX---All-latest-Liquidations)
+
+#### AsterDEX - OpenMarketTrade
+
+AsterDEX - OpenMarketTrade. Uses the `Events` cube. Replace the address in the `where` clause to use it.
+
+▶️ [AsterDEX - OpenMarketTrade](https://ide.bitquery.io/AsterDEX---OpenMarketTrade)
+
+#### Trader's specific event
+
+You can look for `Transaction -> From` or in some cases the address might be in arguments, for example.
+
+▶️ [Trader's specific event](https://ide.bitquery.io/Traders-specific-event)
+
+#### Traders data - 0x01554d63537d3c62715826a268d4eab645d64b92
+
+You can actually merge these two queries. Here is an example.
+
+▶️ [Traders data - 0x01554d63537d3c62715826a268d4eab645d64b92](https://ide.bitquery.io/Copy-of-Traders-data---0x01554d63537d3c62715826a268d4eab645d64b92)
+
+#### Traders data - 0x2b7363708984aa25a90450cfca7bedaf6804115c
+
+Using Bitquery's APIs you can follow specific traders on AsterDEX to check all their latest activities.
+
+▶️ [Traders data - 0x2b7363708984aa25a90450cfca7bedaf6804115c](https://ide.bitquery.io/Traders-data---0x2b7363708984aa25a90450cfca7bedaf6804115c)
+
 ## Arbitrum
 
 ### Trades
@@ -4142,6 +4387,394 @@ The most recent blocks on Avalanche, with height, time, gas used and transaction
 
 ▶️ [Latest blocks](https://ide.bitquery.io/Avalanche-Latest-blocks_1)
 
+## Arc Mainnet
+
+### Trades
+
+#### Quick start: latest Arc mainnet swaps
+
+This query returns the newest swaps with USD values and the DEX name.
+
+▶️ [Quick start: latest Arc mainnet swaps](https://ide.bitquery.io/arc-mainnet-docs-overview-quick-start-latest-arc-mainnet-swaps)
+
+#### Latest trades on Arc
+
+The most recent swaps on the network. `Trade.Buy` is the currency the trader received and `Trade.Sell` is what they paid.
+
+▶️ [Latest trades on Arc](https://ide.bitquery.io/arc-mainnet-latest-dex-trades)
+
+#### Trades of a token on Arc
+
+`DEXTradeByTokens` returns one row per token side of every trade, so a token filter catches it whether it was bought or sold. `Side.Type` says which direction the trade was from the token's point of view.
+
+▶️ [Trades of a token on Arc](https://ide.bitquery.io/arc-mainnet-trades-of-a-token)
+
+#### Trades on one DEX on Arc
+
+Filter by `Dex.ProtocolName`. Values seen on Arc mainnet are `uniswap_v4`, `uniswap_v3`, `uniswap_v2`, `curve_v1` and `aerodrome_v1`.
+
+▶️ [Trades on one DEX on Arc](https://ide.bitquery.io/arc-mainnet-uniswap-v4-trades)
+
+#### Trades in one pool on Arc
+
+For Uniswap v2 and v3 the pool has its own address in `Trade.Dex.SmartContract`. This example reads a live v3 BUILDOG/USDC pool.
+
+▶️ [Trades in one pool on Arc](https://ide.bitquery.io/arc-mainnet-trades-in-a-pool)
+
+#### Trades of a wallet on Arc
+
+`Transaction.From` is the externally owned account that signed the swap. `Trade.Buy.Buyer` and `Trade.Sell.Seller` are the addresses that received and paid the tokens, which can be a router rather than the signer.
+
+▶️ [Trades of a wallet on Arc](https://ide.bitquery.io/arc-mainnet-trades-of-a-wallet)
+
+#### Most traded tokens on Arc
+
+Tokens ranked by trade count over the last 24 hours. Native USDC is the quote on most pools, so it tops the list; the rows under it are the tokens people actually trade.
+
+▶️ [Most traded tokens on Arc](https://ide.bitquery.io/arc-mainnet-most-traded-tokens)
+
+#### Trade count by DEX protocol on Arc
+
+Which DEXes carry mainnet volume. Uniswap v4 led the launch-day check.
+
+▶️ [Trade count by DEX protocol on Arc](https://ide.bitquery.io/arc-mainnet-trades-by-dex)
+
+#### Most active traders on Arc
+
+Signers ranked by swap count. The top rows often include bots and routers, so inspect the address before treating it as a person.
+
+▶️ [Most active traders on Arc](https://ide.bitquery.io/arc-mainnet-most-active-traders)
+
+### Transfers
+
+#### Latest transfers on Arc
+
+The most recent token and native USDC transfers on Arc mainnet.
+
+▶️ [Latest transfers on Arc](https://ide.bitquery.io/arc-mainnet-latest-transfers)
+
+#### Native USDC transfers on Arc
+
+`Currency: {Native: true}` selects value transfers of the gas token. The floor of 100 USDC keeps dust and fee movements out.
+
+▶️ [Native USDC transfers on Arc](https://ide.bitquery.io/arc-mainnet-native-usdc-transfers)
+
+#### Transfers of a token on Arc
+
+Filter on the token contract. This example reads the ERC-20 USDC interface; swap in EURC or any test token.
+
+▶️ [Transfers of a token on Arc](https://ide.bitquery.io/arc-mainnet-erc20-usdc-transfers)
+
+#### Transfers of an address on Arc
+
+Incoming and outgoing transfers in one list. Replace the address with any wallet or contract.
+
+▶️ [Transfers of an address on Arc](https://ide.bitquery.io/arc-mainnet-transfers-of-an-address)
+
+#### Sent and received totals per token on Arc
+
+Two aliased selections give the outbound and inbound sums per currency for a wallet.
+
+▶️ [Sent and received totals per token on Arc](https://ide.bitquery.io/arc-mainnet-address-sent-received)
+
+#### Transfers between two addresses on Arc
+
+Flows from one address to another, in either direction. Useful for tracing a faucet, a bridge or a counterparty.
+
+▶️ [Transfers between two addresses on Arc](https://ide.bitquery.io/arc-mainnet-transfers-between-addresses)
+
+#### Large transfers on Arc
+
+This catches ERC-20 USDC moves above 10,000 and returns both token and USD amounts.
+
+▶️ [Large transfers on Arc](https://ide.bitquery.io/arc-mainnet-large-usdc-transfers)
+
+#### Most transferred tokens on Arc
+
+Tokens ranked by transfer count over 24 hours, with distinct senders and receivers. The system ledger address is excluded.
+
+▶️ [Most transferred tokens on Arc](https://ide.bitquery.io/arc-mainnet-most-transferred-tokens)
+
+#### Hourly transfer volume of a token on Arc
+
+Transfer volume of ERC-20 USDC bucketed by hour, for charts and alerts.
+
+▶️ [Hourly transfer volume of a token on Arc](https://ide.bitquery.io/arc-mainnet-hourly-transfer-volume)
+
+### Balances & Holders
+
+#### Portfolio of a wallet on Arc
+
+Every currency an address holds, with the computed balance and when it last changed. Native USDC has `Native: true`; the ERC-20 interface at `0x3600...` is listed separately.
+
+▶️ [Portfolio of a wallet on Arc](https://ide.bitquery.io/arc-mainnet-docs-balances-portfolio-of-a-wallet)
+
+#### Balance of one token on Arc
+
+The `balanceOf` equivalent for ERC-20 USDC. For the gas token use `Currency: {Native: true}` instead of a contract filter.
+
+▶️ [Balance of one token on Arc](https://ide.bitquery.io/arc-mainnet-docs-balances-balance-of-one-token)
+
+#### Balances of several wallets on Arc
+
+One call for a batch of addresses, grouped by address and currency.
+
+▶️ [Balances of several wallets on Arc](https://ide.bitquery.io/arc-mainnet-docs-balances-balances-of-several-wallets)
+
+#### Top holders of a token on Arc
+
+Current EURC holders ranked by token balance. Add `Balance: {Amount: {gt: "0"}}` so wallets that once held the token but now hold zero do not appear.
+
+▶️ [Top holders of a token on Arc](https://ide.bitquery.io/arc-mainnet-docs-balances-top-holders-of-a-token)
+
+#### Balance history of a wallet on Arc
+
+Each change to a wallet's ERC-20 USDC balance, newest first, with the transaction behind it. Positive amounts are inflows.
+
+▶️ [Balance history of a wallet on Arc](https://ide.bitquery.io/arc-mainnet-docs-balances-balance-history-of-a-wallet)
+
+#### Net change per currency over a window on Arc
+
+Sum the updates per currency to see what a wallet gained or lost over the last 24 hours.
+
+▶️ [Net change per currency over a window on Arc](https://ide.bitquery.io/arc-mainnet-docs-balances-net-change-per-currency-over-a-window)
+
+### Price & OHLC
+
+#### OHLCV candles for a token on Arc
+
+Hourly candles for EURC priced in ERC-20 USDC. `Block.Time(interval: ...)` buckets the trades; `open` and `close` take the price at the lowest and highest block in the bucket. Change `count` and `in` for other intervals.
+
+▶️ [OHLCV candles for a token on Arc](https://ide.bitquery.io/arc-mainnet-ohlcv-candles)
+
+#### Latest price of a token on Arc
+
+The price of the most recent EURC trade against ERC-20 USDC. `Trade.PriceInUSD` is populated on Arc mainnet.
+
+▶️ [Latest price of a token on Arc](https://ide.bitquery.io/arc-mainnet-latest-token-price)
+
+### Supply & Market Cap
+
+#### Total supply of a token on Arc
+
+`TransactionBalances` records the token's total supply after each transaction that touched it. The latest row is the current supply, already adjusted for decimals.
+
+▶️ [Total supply of a token on Arc](https://ide.bitquery.io/arc-mainnet-docs-balances-total-supply-of-a-token)
+
+### Liquidity & Pools
+
+#### New Uniswap v4 pools on Arc
+
+Uniswap v4 carried most launch-day swaps. A new pool is an `Initialize` event on the PoolManager; its arguments give the pool `id`, the two currencies, the fee tier, tick spacing, hook address and opening price.
+
+▶️ [New Uniswap v4 pools on Arc](https://ide.bitquery.io/arc-mainnet-new-uniswap-v4-pools)
+
+#### New Uniswap v3 and v2 pools on Arc
+
+Several v3 and v2 factory deployments appeared on mainnet, so filter on the event name rather than one factory address. `PoolCreated` is v3, `PairCreated` is v2; both carry the two tokens and the new pool address in their arguments.
+
+▶️ [New Uniswap v3 and v2 pools on Arc](https://ide.bitquery.io/arc-mainnet-new-v3-v2-pools)
+
+### Transactions
+
+#### Latest transactions on Arc
+
+The most recent transactions on Arc mainnet, newest first.
+
+▶️ [Latest transactions on Arc](https://ide.bitquery.io/arc-mainnet-latest-transactions)
+
+#### Transaction by hash on Arc
+
+The equivalent of `eth_getTransactionByHash` plus `eth_getTransactionReceipt` in one call. The example hash is a live USDC value transfer; replace it with any recent hash.
+
+▶️ [Transaction by hash on Arc](https://ide.bitquery.io/arc-mainnet-transaction-by-hash)
+
+#### Transactions of an address on Arc
+
+Sent and received transactions of one address, newest first. This is the explorer's address page.
+
+▶️ [Transactions of an address on Arc](https://ide.bitquery.io/arc-mainnet-transactions-of-an-address)
+
+#### Failed transactions on Arc
+
+Transactions whose receipt status is 0. Join the [reverted calls](/docs/blockchain/arc-mainnet/arc-mainnet-calls-api/#reverted-calls) query on the hash to see the revert reason.
+
+▶️ [Failed transactions on Arc](https://ide.bitquery.io/arc-mainnet-failed-transactions)
+
+#### Gas fees in USDC on Arc
+
+Because gas is paid in USDC, `Fee.SenderFee` is already a dollar amount. This gives the average, median and total fee per hour along with the average effective gas price.
+
+▶️ [Gas fees in USDC on Arc](https://ide.bitquery.io/arc-mainnet-gas-fee-statistics)
+
+### Events & Calls
+
+#### Latest calls on Arc
+
+The most recent top-level calls, one per transaction.
+
+▶️ [Latest calls on Arc](https://ide.bitquery.io/arc-mainnet-latest-calls)
+
+#### Calls of one method on Arc
+
+Filter on the decoded method name and the contract. This reads `transfer` calls into the ERC-20 USDC contract with their decoded arguments.
+
+▶️ [Calls of one method on Arc](https://ide.bitquery.io/arc-mainnet-calls-of-a-method)
+
+#### Calls by 4-byte selector on Arc
+
+When the ABI is not registered, filter on the selector in `Call.Input` instead. This matches `approve(address,uint256)` by its `0x095ea7b3` prefix on any contract.
+
+▶️ [Calls by 4-byte selector on Arc](https://ide.bitquery.io/arc-mainnet-calls-by-selector)
+
+#### Internal calls of a transaction on Arc
+
+The full call tree of one transaction, ordered by call index. Replace the hash with any recent transaction from the [Transactions API](/docs/blockchain/arc-mainnet/arc-mainnet-transactions-api/).
+
+▶️ [Internal calls of a transaction on Arc](https://ide.bitquery.io/arc-mainnet-internal-calls-of-transaction)
+
+#### Contract deployments on Arc
+
+`Call.Create: true` marks a call that deployed a contract. The new address is in `Receipt.ContractAddress` for top-level deployments; for factory deployments read `Call.To` on the create call.
+
+▶️ [Contract deployments on Arc](https://ide.bitquery.io/arc-mainnet-contract-deployments)
+
+#### Reverted calls on Arc
+
+Calls that reverted, with the error string when the EVM returned one. Useful for debugging a contract under test.
+
+▶️ [Reverted calls on Arc](https://ide.bitquery.io/arc-mainnet-reverted-calls)
+
+#### Most called methods on Arc
+
+Method signatures ranked by call count over 24 hours. ERC-20 `transfer`, `balanceOf` and `approve` dominate, followed by Uniswap v4 hook callbacks.
+
+▶️ [Most called methods on Arc](https://ide.bitquery.io/arc-mainnet-most-called-methods)
+
+#### Calls that move native USDC on Arc
+
+Internal calls that carried native USDC value. This is how value moves between contracts shows up, since those movements are not ERC-20 `Transfer` events.
+
+▶️ [Calls that move native USDC on Arc](https://ide.bitquery.io/arc-mainnet-calls-with-value)
+
+#### Events from one contract on Arc
+
+`LogHeader.Address` is the `address` filter of `eth_getLogs`. This reads the latest events of the ERC-20 USDC contract.
+
+▶️ [Events from one contract on Arc](https://ide.bitquery.io/arc-mainnet-events-from-a-contract)
+
+#### One event across all contracts on Arc
+
+Filter by decoded signature name to watch one event type from every contract that emits it. This catches every `Swap`, from Uniswap v2 pairs, v3 pools and the v4 PoolManager alike.
+
+▶️ [One event across all contracts on Arc](https://ide.bitquery.io/arc-mainnet-swap-events)
+
+#### Filter by raw topic0 on Arc
+
+When you have the signature hash rather than the name, filter on `Log.Signature.SignatureHash`. This is the ERC-20 `Transfer(address,address,uint256)` hash, written without `0x`.
+
+▶️ [Filter by raw topic0 on Arc](https://ide.bitquery.io/arc-mainnet-events-by-topic0)
+
+#### Filter by a decoded argument on Arc
+
+Server-side filtering on decoded values is what a node cannot do. This finds every event whose argument named `to` equals a wallet, across all contracts and signatures.
+
+▶️ [Filter by a decoded argument on Arc](https://ide.bitquery.io/arc-mainnet-events-by-argument)
+
+#### Busiest contracts and signatures on Arc
+
+Which contracts and event types dominate the log stream over 24 hours. Run this first on any network you have not explored yet.
+
+▶️ [Busiest contracts and signatures on Arc](https://ide.bitquery.io/arc-mainnet-busiest-event-contracts)
+
+#### Undecoded events on Arc
+
+Events whose ABI is not registered arrive with an empty `Signature.Name` and no `Arguments`, but the raw `Topics` and `Log.SmartContract` are still there. This lists the contracts emitting the most undecoded events; if one matters to you, ask support to register its ABI.
+
+▶️ [Undecoded events on Arc](https://ide.bitquery.io/arc-mainnet-undecoded-events)
+
+### Launchpads
+
+#### Latest launches on Arc
+
+Use the same filters with `query`, a row limit, and descending block time to fetch the newest launches.
+
+▶️ [Latest launches on Arc](https://ide.bitquery.io/arc-mainnet-docs-launchpads-latest-launches)
+
+#### Launch count by platform on Arc
+
+Group launch events by emitting contract to compare activity during the last hour. The result uses contract addresses, so map them to the table above in your app.
+
+▶️ [Launch count by platform on Arc](https://ide.bitquery.io/arc-mainnet-docs-launchpads-launch-count-by-platform)
+
+#### Trades for a launched token on Arc
+
+Copy the token address from `Topics[1]` into `Trade.Currency.SmartContract`. This example follows a token launched through RadarDEX.
+
+▶️ [Trades for a launched token on Arc](https://ide.bitquery.io/arc-mainnet-docs-launchpads-trades-for-a-launched-token)
+
+#### OHLCV for a launched token on Arc
+
+This query builds five-minute candles for the same token against Arc's ERC-20 USDC interface. It returns USD volume, open, high, low, close, and trade count.
+
+▶️ [OHLCV for a launched token on Arc](https://ide.bitquery.io/arc-mainnet-docs-launchpads-ohlcv-for-a-launched-token)
+
+### Blocks & Validators
+
+#### Datasets and history on Arc
+
+On 16 September 2026, only the realtime path answered. Its depth changes, so measure the current window before running a long-range query.
+
+▶️ [Datasets and history on Arc](https://ide.bitquery.io/arc-mainnet-docs-overview-datasets-and-history)
+
+#### Latest blocks on Arc
+
+Change `query` to `subscription` and drop `limit` and `orderBy` to receive each block header as it is indexed.
+
+▶️ [Latest blocks on Arc](https://ide.bitquery.io/arc-mainnet-latest-blocks)
+
+#### Block by number on Arc
+
+Header, gas and transaction count of one Arc mainnet block.
+
+▶️ [Block by number on Arc](https://ide.bitquery.io/arc-mainnet-block-by-number)
+
+#### Block and throughput statistics on Arc
+
+Blocks, transactions, average transactions per block and average gas per block for each of the last 24 hours. Divide the block count by 3600 to get blocks per second.
+
+▶️ [Block and throughput statistics on Arc](https://ide.bitquery.io/arc-mainnet-block-statistics)
+
+## x402
+
+### Trades
+
+#### Payment Analytics for x402 Server on Solana
+
+Payment Analytics for x402 Server on Solana. Replace the address in the `where` clause to use it.
+
+▶️ [Payment Analytics for x402 Server on Solana](https://ide.bitquery.io/Payment-analytics-related-specific-x402-server-on-Solana)
+
+### Transfers
+
+#### Get Latest Payments to x402 Server
+
+Get Latest Payments to x402 Server. Uses the `Transfers` cube.
+
+▶️ [Get Latest Payments to x402 Server](https://ide.bitquery.io/Latest-payment-to-specific-x402-server)
+
+#### Get Latest Payments to x402 Server on Solana
+
+Get Latest Payments to x402 Server on Solana. Uses the `Transfers` cube. Replace the address in the `where` clause to use it.
+
+▶️ [Get Latest Payments to x402 Server on Solana](https://ide.bitquery.io/Latest-Payment-to-specific-x402-server-taking-solana-payments)
+
+#### Payment Analytics for x402 Server
+
+Comprehensive payment analytics including total volume, unique users, transaction counts, and time-based breakdowns for a specific x402 server.
+
+▶️ [Payment Analytics for x402 Server](https://ide.bitquery.io/Payment-analytics-related-specific-x402-server)
+
 ## Celo
 
 ### Transfers
@@ -4299,6 +4932,212 @@ Decoded event logs on Klaytn. Filter by `smartContractAddress` to watch a single
 The most recent blocks on Klaytn, with height, time, gas used and transaction count.
 
 ▶️ [Latest blocks](https://ide.bitquery.io/Klaytn-Latest-blocks)
+
+## Cardano
+
+### Trades
+
+#### Cardano Price
+
+This query returns the latest price of Cardano on Cardano Network.
+
+▶️ [Cardano Price](https://ide.bitquery.io/latest-cardano-price)
+
+### Transfers
+
+#### Cardano User Transfers
+
+This query returns the latest transfers for a useron Cardano network.
+
+▶️ [Cardano User Transfers](https://ide.bitquery.io/cardano-transfers-of-a-wallet)
+
+### Balances & Holders
+
+#### Cardano Balance
+
+This query returns the current balance of a user on Cardano network.
+
+▶️ [Cardano Balance](https://ide.bitquery.io/cardano-address-balance_1)
+
+## Ripple
+
+### Trades
+
+#### Ripple Token DEX Trades
+
+This query returns the latest trades of a currency on the Ripple network.
+
+▶️ [Ripple Token DEX Trades](https://ide.bitquery.io/trades-for-CNY-on-ripple)
+
+#### Ripple Payments
+
+This query returns the latest payments on Ripple network.
+
+▶️ [Ripple Payments](https://ide.bitquery.io/Latest-payments-on-ripple-blockchain)
+
+### Transfers
+
+#### Ripple Historical Transfers
+
+This query returns all the historical transfers done by a specific address on the Ripple network.
+
+▶️ [Ripple Historical Transfers](https://ide.bitquery.io/All-historical-transfers-of-an-individual-address)
+
+### Balances & Holders
+
+#### Ripple Historical Balance
+
+This query returns all historical balance of an address on Ripple network.
+
+▶️ [Ripple Historical Balance](https://ide.bitquery.io/historical-balances-of-a-ripple-address)
+
+### Transactions
+
+#### Transaction Details using Hash
+
+This query uses transaction hash and date range as filter to fetch tx details.
+
+▶️ [Transaction Details using Hash](https://ide.bitquery.io/xrpl-search-tx-details)
+
+## Stellar
+
+### Trades
+
+#### Latest DEX trades
+
+Trades on the Stellar decentralised exchange, with both sides of the pair and the amounts.
+
+▶️ [Latest DEX trades](https://ide.bitquery.io/Stellar-Latest-DEX-trades)
+
+### Transfers
+
+#### Latest payments
+
+Stellar payment operations — who paid whom, in which asset, and how much.
+
+▶️ [Latest payments](https://ide.bitquery.io/Stellar-Latest-payments)
+
+### Balances & Holders
+
+#### Balance of an address at a past date
+
+What one Stellar address held as of a chosen date. Move the date in the Variables pane.
+
+▶️ [Balance of an address at a past date](https://ide.bitquery.io/Stellar-Balance-of-an-address-at-a-past-date)
+
+#### Balances of an address
+
+Every asset balance held by one Stellar account. Replace the address to use it.
+
+▶️ [Balances of an address](https://ide.bitquery.io/Stellar-Balances-of-an-address)
+
+### Liquidity & Pools
+
+#### Liquidity pool trades
+
+Swaps routed through Stellar liquidity pools, with the pool id and both legs.
+
+▶️ [Liquidity pool trades](https://ide.bitquery.io/Stellar-Liquidity-pool-trades)
+
+### Transactions
+
+#### Latest transactions
+
+Recent Stellar transactions with sender, fee and success flag. Move `since` in the Variables pane to change the window.
+
+▶️ [Latest transactions](https://ide.bitquery.io/Stellar-Latest-transactions)
+
+### Blocks & Validators
+
+#### Latest ledgers
+
+The most recent Stellar ledgers with close time, transaction count and fee pool.
+
+▶️ [Latest ledgers](https://ide.bitquery.io/Stellar-Latest-ledgers)
+
+## Algorand
+
+### Transfers
+
+#### All the transfers of an asset on Algorand Mainnet in a specific timeframe
+
+Returns transfers for asset ID `31566704` between two dates, ordered by block height descending. Swap the `currency` filter for any ASA ID or ALGO.
+
+▶️ [All the transfers of an asset on Algorand Mainnet in a specific timeframe](https://ide.bitquery.io/All-the-transfers-of-an-asset-on-Algorand-Mainnet-in-a-specific-timeframe)
+
+#### Traansfers where a currency is sent from or sent to a particular address
+
+Uses the `any` filter to match transfers where the address appears as either sender or receiver.
+
+▶️ [Traansfers where a currency is sent from or sent to a particular address](https://ide.bitquery.io/traansfers-where-a-currency-is-sent-from-or-sent-to-a-particular-address)
+
+### Price & OHLC
+
+#### Get Count of Smart Contract Calls in Latest Block
+
+Returns the count of unique smart contract calls in the most recent block after a given date.
+
+▶️ [Get Count of Smart Contract Calls in Latest Block](https://ide.bitquery.io/Get-Count-of-Smart-Contract-Calls-in-Latest-Block_1)
+
+### Transactions
+
+#### All Transactions on Algorand
+
+Paginated query for all transactions in a specific window.
+
+▶️ [All Transactions on Algorand](https://ide.bitquery.io/All-Transactions-on-Algorand)
+
+#### Daily Transaction Count for last 10 days
+
+Returns the number of transactions per day over the last 10 days, ordered by date descending.
+
+▶️ [Daily Transaction Count for last 10 days](https://ide.bitquery.io/Daily-Transaction-Count-for-last-10-days)
+
+#### Daily Unique Txn Senders on algorand
+
+Counts distinct transaction senders on a specific date.
+
+▶️ [Daily Unique Txn Senders on algorand](https://ide.bitquery.io/Daily-Unique-Txn-Senders-on-algorand)
+
+## Filecoin
+
+### Transfers
+
+#### Latest transfers
+
+FIL value moving between addresses. Add a sender or receiver filter to follow one account.
+
+▶️ [Latest transfers](https://ide.bitquery.io/Filecoin-Latest-transfers)
+
+### Balances & Holders
+
+#### Balance of an address at a past date
+
+What one Filecoin address held as of a chosen date. Move the date in the Variables pane.
+
+▶️ [Balance of an address at a past date](https://ide.bitquery.io/Filecoin-Balance-of-an-address-at-a-past-date)
+
+#### Balance of an address
+
+The FIL balance held by one Filecoin address. Replace the address to use it.
+
+▶️ [Balance of an address](https://ide.bitquery.io/Filecoin-Balance-of-an-address)
+
+### Transactions
+
+#### Latest messages
+
+Filecoin messages — the chain's transactions — with sender, receiver, value and method.
+
+▶️ [Latest messages](https://ide.bitquery.io/Filecoin-Latest-messages)
+
+### Blocks & Validators
+
+#### Latest tipsets
+
+The most recent Filecoin tipsets with height and time.
+
+▶️ [Latest tipsets](https://ide.bitquery.io/Filecoin-Latest-tipsets)
 
 ## Litecoin
 
@@ -4559,687 +5398,3 @@ The most recent transactions on Zcash, with value, fee and input/output counts. 
 The most recent blocks on Zcash, with height, time, transaction count and size.
 
 ▶️ [Latest blocks](https://ide.bitquery.io/Zcash-Latest-blocks)
-
-## Cardano
-
-### Trades
-
-#### Cardano Price
-
-This query returns the latest price of Cardano on Cardano Network.
-
-▶️ [Cardano Price](https://ide.bitquery.io/latest-cardano-price)
-
-### Transfers
-
-#### Cardano User Transfers
-
-This query returns the latest transfers for a useron Cardano network.
-
-▶️ [Cardano User Transfers](https://ide.bitquery.io/cardano-transfers-of-a-wallet)
-
-### Balances & Holders
-
-#### Cardano Balance
-
-This query returns the current balance of a user on Cardano network.
-
-▶️ [Cardano Balance](https://ide.bitquery.io/cardano-address-balance_1)
-
-## Ripple
-
-### Trades
-
-#### Ripple Token DEX Trades
-
-This query returns the latest trades of a currency on the Ripple network.
-
-▶️ [Ripple Token DEX Trades](https://ide.bitquery.io/trades-for-CNY-on-ripple)
-
-#### Ripple Payments
-
-This query returns the latest payments on Ripple network.
-
-▶️ [Ripple Payments](https://ide.bitquery.io/Latest-payments-on-ripple-blockchain)
-
-### Transfers
-
-#### Ripple Historical Transfers
-
-This query returns all the historical transfers done by a specific address on the Ripple network.
-
-▶️ [Ripple Historical Transfers](https://ide.bitquery.io/All-historical-transfers-of-an-individual-address)
-
-### Balances & Holders
-
-#### Ripple Historical Balance
-
-This query returns all historical balance of an address on Ripple network.
-
-▶️ [Ripple Historical Balance](https://ide.bitquery.io/historical-balances-of-a-ripple-address)
-
-### Transactions
-
-#### Transaction Details using Hash
-
-This query uses transaction hash and date range as filter to fetch tx details.
-
-▶️ [Transaction Details using Hash](https://ide.bitquery.io/xrpl-search-tx-details)
-
-## Stellar
-
-### Trades
-
-#### Latest DEX trades
-
-Trades on the Stellar decentralised exchange, with both sides of the pair and the amounts.
-
-▶️ [Latest DEX trades](https://ide.bitquery.io/Stellar-Latest-DEX-trades)
-
-### Transfers
-
-#### Latest payments
-
-Stellar payment operations — who paid whom, in which asset, and how much.
-
-▶️ [Latest payments](https://ide.bitquery.io/Stellar-Latest-payments)
-
-### Balances & Holders
-
-#### Balance of an address at a past date
-
-What one Stellar address held as of a chosen date. Move the date in the Variables pane.
-
-▶️ [Balance of an address at a past date](https://ide.bitquery.io/Stellar-Balance-of-an-address-at-a-past-date)
-
-#### Balances of an address
-
-Every asset balance held by one Stellar account. Replace the address to use it.
-
-▶️ [Balances of an address](https://ide.bitquery.io/Stellar-Balances-of-an-address)
-
-### Liquidity & Pools
-
-#### Liquidity pool trades
-
-Swaps routed through Stellar liquidity pools, with the pool id and both legs.
-
-▶️ [Liquidity pool trades](https://ide.bitquery.io/Stellar-Liquidity-pool-trades)
-
-### Transactions
-
-#### Latest transactions
-
-Recent Stellar transactions with sender, fee and success flag. Move `since` in the Variables pane to change the window.
-
-▶️ [Latest transactions](https://ide.bitquery.io/Stellar-Latest-transactions)
-
-### Blocks & Validators
-
-#### Latest ledgers
-
-The most recent Stellar ledgers with close time, transaction count and fee pool.
-
-▶️ [Latest ledgers](https://ide.bitquery.io/Stellar-Latest-ledgers)
-
-## Algorand
-
-### Transfers
-
-#### All the transfers of an asset on Algorand Mainnet in a specific timeframe
-
-Returns transfers for asset ID `31566704` between two dates, ordered by block height descending. Swap the `currency` filter for any ASA ID or ALGO.
-
-▶️ [All the transfers of an asset on Algorand Mainnet in a specific timeframe](https://ide.bitquery.io/All-the-transfers-of-an-asset-on-Algorand-Mainnet-in-a-specific-timeframe)
-
-#### Traansfers where a currency is sent from or sent to a particular address
-
-Uses the `any` filter to match transfers where the address appears as either sender or receiver.
-
-▶️ [Traansfers where a currency is sent from or sent to a particular address](https://ide.bitquery.io/traansfers-where-a-currency-is-sent-from-or-sent-to-a-particular-address)
-
-### Price & OHLC
-
-#### Get Count of Smart Contract Calls in Latest Block
-
-Returns the count of unique smart contract calls in the most recent block after a given date.
-
-▶️ [Get Count of Smart Contract Calls in Latest Block](https://ide.bitquery.io/Get-Count-of-Smart-Contract-Calls-in-Latest-Block_1)
-
-### Transactions
-
-#### All Transactions on Algorand
-
-Paginated query for all transactions in a specific window.
-
-▶️ [All Transactions on Algorand](https://ide.bitquery.io/All-Transactions-on-Algorand)
-
-#### Daily Transaction Count for last 10 days
-
-Returns the number of transactions per day over the last 10 days, ordered by date descending.
-
-▶️ [Daily Transaction Count for last 10 days](https://ide.bitquery.io/Daily-Transaction-Count-for-last-10-days)
-
-#### Daily Unique Txn Senders on algorand
-
-Counts distinct transaction senders on a specific date.
-
-▶️ [Daily Unique Txn Senders on algorand](https://ide.bitquery.io/Daily-Unique-Txn-Senders-on-algorand)
-
-## Filecoin
-
-### Transfers
-
-#### Latest transfers
-
-FIL value moving between addresses. Add a sender or receiver filter to follow one account.
-
-▶️ [Latest transfers](https://ide.bitquery.io/Filecoin-Latest-transfers)
-
-### Balances & Holders
-
-#### Balance of an address at a past date
-
-What one Filecoin address held as of a chosen date. Move the date in the Variables pane.
-
-▶️ [Balance of an address at a past date](https://ide.bitquery.io/Filecoin-Balance-of-an-address-at-a-past-date)
-
-#### Balance of an address
-
-The FIL balance held by one Filecoin address. Replace the address to use it.
-
-▶️ [Balance of an address](https://ide.bitquery.io/Filecoin-Balance-of-an-address)
-
-### Transactions
-
-#### Latest messages
-
-Filecoin messages — the chain's transactions — with sender, receiver, value and method.
-
-▶️ [Latest messages](https://ide.bitquery.io/Filecoin-Latest-messages)
-
-### Blocks & Validators
-
-#### Latest tipsets
-
-The most recent Filecoin tipsets with height and time.
-
-▶️ [Latest tipsets](https://ide.bitquery.io/Filecoin-Latest-tipsets)
-
-## Trading API
-
-### Trades
-
-#### Average fee per trade, Total fees, total volume, trades count per DEX program
-
-Average fee per trade, Total fees, total volume, trades count per DEX program. Uses the `Trades` cube.
-
-▶️ [Average fee per trade, Total fees, total volume, trades count per DEX program](https://ide.bitquery.io/Average-fee-per-trade-Total-fees-total-volume-trades-count-per-DEX-program)
-
-#### Last 10 WSOL USDC Token pair trades
-
-Last 10 WSOL USDC Token pair trades. Uses the `Trades` cube.
-
-▶️ [Last 10 WSOL USDC Token pair trades](https://ide.bitquery.io/Last-10-WSOL-USDC-Token-pair-trades)
-
-#### Most active market pools by trades
-
-Most active market pools by trades. Uses the `Trades` cube.
-
-▶️ [Most active market pools by trades](https://ide.bitquery.io/Most-active-market-pools-by-trades)
-
-#### Most active traders by trade count
-
-Most active traders by trade count. Uses the `Trades` cube.
-
-▶️ [Most active traders by trade count](https://ide.bitquery.io/Most-active-traders-by-trade-count)
-
-#### Most traded token in last 1 hour on solana and it's average trade amount and total volume
-
-Most traded token in last 1 hour on solana and it's average trade amount and total volume. Uses the `Trades` cube.
-
-▶️ [Most traded token in last 1 hour on solana and it's average trade amount and total volume](https://ide.bitquery.io/Most-traded-token-in-last-1-hour-on-solana-and-its-average-trade-amount-and-total-volume)
-
-#### Net flow (buys - sells) per token symbol
-
-Net flow (buys - sells) per token symbol. Uses the `Trades` cube.
-
-▶️ [Net flow (buys - sells) per token symbol](https://ide.bitquery.io/Net-flow-buys---sells-per-token-symbol_2)
-
-#### Tokens with highest trade frequency
-
-Tokens with highest trade frequency. Uses the `Trades` cube.
-
-▶️ [Tokens with highest trade frequency](https://ide.bitquery.io/Tokens-with-highest-trade-frequency)
-
-#### Tokens with most unique buyers
-
-Tokens with most unique buyers. Uses the `Trades` cube.
-
-▶️ [Tokens with most unique buyers](https://ide.bitquery.io/Tokens-with-most-unique-buyers)
-
-#### Top Traders on Solana
-
-Top Traders on Solana. Uses the `Trades` cube.
-
-▶️ [Top Traders on Solana](https://ide.bitquery.io/Top-Traders-on-Solana_2)
-
-#### Total SOL fees, Total Volume, Total count trades
-
-Total SOL fees, Total Volume, Total count trades. Uses the `Trades` cube.
-
-▶️ [Total SOL fees, Total Volume, Total count trades](https://ide.bitquery.io/Total-SOL-fees-Total-Volume-Total-count-trades)
-
-### Price & OHLC
-
-#### Token price from top market (rank 1)
-
-The recommended way to price one token: takes the single highest-ranked market for it rather than blending every pool. Prices the token from its single top market rather than blending every pool, which is what you want for one specific token.
-
-▶️ [Token price from top market (rank 1)](https://ide.bitquery.io/Token-price-from-top-market--rank-1_2)
-
-#### Multi-token watchlist, top market each
-
-Prices a list of tokens, each from its own top market. Add or remove addresses in the `Token.Address.in` filter.
-
-▶️ [Multi-token watchlist, top market each](https://ide.bitquery.io/Multi-token-watchlist--rank-1-per-token)
-
-#### Historical Bitcoin OHLC data for the last 7 days
-
-Recent Bitcoin OHLC using the Crypto Price API (time range in the query matches what the Price Index supports).
-
-▶️ [Historical Bitcoin OHLC data for the last 7 days](https://ide.bitquery.io/historical-Bitcoin-OHLC-data-for-the-last-7-days)
-
-#### OHLC of a currency on multiple blockchains
-
-Stream real-time Bitcoin OHLC data aggregated from all supported blockchains (Bitcoin, Ethereum WBTC, Solana, etc.) with 60-second intervals.
-
-▶️ [OHLC of a currency on multiple blockchains](https://ide.bitquery.io/OHLC-of-a-currency-on-multiple-blockchains)
-
-### Supply & Market Cap
-
-#### Marketcap of pump token
-
-Set token address and read `Supply.MarketCap` from the query below. See the Supply fields reference for related supply fields. You can also stream this in real-time by adding the keyword "subscription" at the top.
-
-▶️ [Marketcap of pump token](https://ide.bitquery.io/marketcap-of-pump-token)
-
-#### Tokens ranked by market cap
-
-Tokens ranked by market cap. Uses the `Trades` cube.
-
-▶️ [Tokens ranked by market cap](https://ide.bitquery.io/Tokens-ranked-by-market-cap_1)
-
-## Stablecoins
-
-### Trades
-
-#### Solana USDT trades query
-
-Solana trades quoted in USDT. USDT is the quote side on Solana, so it is filtered with `Pair.QuoteToken`, not `Pair.Token`, which would return nothing. The Trading cube reaches back about 30 days; `Solana.DEXTrades` keeps about 12 hours.
-
-▶️ [Solana USDT trades query](https://ide.bitquery.io/solana-USDT-trades-query)
-
-### Transfers
-
-#### Latest Tron USDT Transfers
-
-Listen to stablecoin payments across all major blockchains. The Mempool option lets you detect a payment *before* it is confirmed — useful for instant merchant UX.
-
-▶️ [Latest Tron USDT Transfers](https://ide.bitquery.io/Latest-Tron-USDT-Transfers)
-
-#### Latest USDT/USDC Transfer api on base
-
-Listen to stablecoin payments across all major blockchains. The Mempool option lets you detect a payment *before* it is confirmed — useful for instant merchant UX.
-
-▶️ [Latest USDT/USDC Transfer api on base](https://ide.bitquery.io/Latest-USDTUSDC-Transfer-api-on-base)
-
-#### Latest USDT/USDC Transfer api on ethereum
-
-Listen to stablecoin payments across all major blockchains. The Mempool option lets you detect a payment *before* it is confirmed — useful for instant merchant UX.
-
-▶️ [Latest USDT/USDC Transfer api on ethereum](https://ide.bitquery.io/Latest-USDTUSDC-Transfer-api-on-ethereum)
-
-#### Stablecoin Transfers from/to an address
-
-Stablecoin Transfers from/to an address. Uses the `Transfers` cube. Change the token address in the `where` clause to use it.
-
-▶️ [Stablecoin Transfers from/to an address](https://ide.bitquery.io/stablecoin-Transfers-fromto-an-address)
-
-#### Stablecoin recieved and sent by an address
-
-Stablecoin recieved and sent by an address. Uses the `Transfers` cube. Change the token address in the `where` clause to use it. Needs the historical data add-on — see the comment at the top of the query.
-
-▶️ [Stablecoin recieved and sent by an address](https://ide.bitquery.io/Stablecoin-recieved-and-sent-by-an-address)
-
-#### USDT Stablecoin reserves on Ethereum
-
-USDT Stablecoin reserves on Ethereum. Uses the `Transfers` cube. Change the token address in the `where` clause to use it. Needs the historical data add-on — see the comment at the top of the query.
-
-▶️ [USDT Stablecoin reserves on Ethereum](https://ide.bitquery.io/USDT-Stablecoin-reserves-on-Ethereum)
-
-#### USDT and USDC token Transfers api on solana
-
-USDT and USDC token Transfers api on solana. Uses the `Transfers` cube.
-
-▶️ [USDT and USDC token Transfers api on solana](https://ide.bitquery.io/USDT-and-USDC-token-Transfers-api-on-solana)
-
-#### USDT token Transfers api on solana
-
-Track live USDT stablecoin transfers. USDT is ideal for payments, settlements, etc and you can track those in real-time using this API/Stream -.
-
-▶️ [USDT token Transfers api on solana](https://ide.bitquery.io/USDT-token-Transfers-api-on-solana)
-
-### Price & OHLC
-
-#### 5 minute price change stablecoin API
-
-5 minute price change stablecoin API. Uses the `Tokens` cube.
-
-▶️ [5 minute price change stablecoin API](https://ide.bitquery.io/5-minute-price-change-stablecoin-API)
-
-#### Stablecoin price query of USDT
-
-Get real-time and historical USDT prices, OHLCV, and moving averages across supported networks and markets.
-
-▶️ [Stablecoin price query of USDT](https://ide.bitquery.io/stablecoin-price-query-of-USDT_1)
-
-#### Usdt latest price arbitrage
-
-This query compares USDT prices across different blockchain networks in real-time. It fetches the latest price data for USDT from different networks, showing you where the same stablecoin trades at different prices.
-
-▶️ [Usdt latest price arbitrage](https://ide.bitquery.io/usdt-latest-price-arbitrage)
-
-### Supply & Market Cap
-
-#### USDC Stablecoin reserves on Solana
-
-USDC Stablecoin reserves on Solana. Uses the `TokenSupplyUpdates` cube. Change the token address in the `where` clause to use it.
-
-▶️ [USDC Stablecoin reserves on Solana](https://ide.bitquery.io/USDC-Stablecoin-reserves-on-Solana)
-
-#### USDT Stablecoin reserves on Solana query
-
-USDT Stablecoin reserves on Solana query. Uses the `TokenSupplyUpdates` cube. Change the token address in the `where` clause to use it.
-
-▶️ [USDT Stablecoin reserves on Solana query](https://ide.bitquery.io/USDT-Stablecoin-reserves-on-Solana--query)
-
-## NFTs
-
-### Trades
-
-#### New Uniswap v3 liquidity positions
-
-Position NFTs as they are minted — who is adding liquidity to v3 pools, and to which pair.
-
-▶️ [New Uniswap v3 liquidity positions](https://ide.bitquery.io/recent-uniswap-position-NFTs-mint_1)
-
-#### Get NFT trades for a specific NFT contract on specific marketplace
-
-Get trades of NFTs for a given contract and marketplace. Built from raw DEX trades, so it reaches back further than the Trading cube's ~30 days. For live prices prefer the Trading cube entries at the top of this section.
-
-▶️ [Get NFT trades for a specific NFT contract on specific marketplace](https://ide.bitquery.io/Get-NFT-trades-by-contract)
-
-#### Get NFT trades for a specific NFT contract and token ID
-
-Get trades of NFTs for a given contract and token ID. Built from raw DEX trades, so it reaches back further than the Trading cube's ~30 days. For live prices prefer the Trading cube entries at the top of this section.
-
-▶️ [Get NFT trades for a specific NFT contract and token ID](https://ide.bitquery.io/Get-NFT-trades-by-token)
-
-#### Get NFT trades by wallet
-
-Get trades of NFTs for a given wallet. Built from raw DEX trades, so it reaches back further than the Trading cube's ~30 days. For live prices prefer the Trading cube entries at the top of this section.
-
-▶️ [Get NFT trades by wallet](https://ide.bitquery.io/Get-trades-of-NFTs-for-a-given-wallet)
-
-#### Latest NFT Trades
-
-Latest NFT Trades. Built from raw DEX trades, so it reaches back further than the Trading cube's ~30 days. For live prices prefer the Trading cube entries at the top of this section.
-
-▶️ [Latest NFT Trades](https://ide.bitquery.io/Latest-NFT-trades-on-ETH)
-
-#### Top Traded NFTs in a Period
-
-This query gets the top 10 traded NFTs based on the number of trades within a specified date range. You can change the filters such as the date range and limit. Built from raw DEX trades, so it reaches back further than the Trading cube's ~30 days. For live prices prefer the Trading cube entries at the top of this section.
-
-▶️ [Top Traded NFTs in a Period](https://ide.bitquery.io/Top-traded-NFT-tokens-in-a-month)
-
-#### Latests OpenSea Trades
-
-Latests OpenSea Trades. Built from raw DEX trades, so it reaches back further than the Trading cube's ~30 days. For live prices prefer the Trading cube entries at the top of this section.
-
-▶️ [Latests OpenSea Trades](https://ide.bitquery.io/Latests-OpenSea-Trades)
-
-#### Latest NFT trades on Ethereum network
-
-Latest NFT trades on Ethereum network. Built from raw DEX trades, so it reaches back further than the Trading cube's ~30 days. For live prices prefer the Trading cube entries at the top of this section.
-
-▶️ [Latest NFT trades on Ethereum network](https://ide.bitquery.io/latest-NFT-trades-on-Ethereum-network)
-
-#### Pairs of blur token new dataset
-
-Open the above query on GraphQL IDE using this. Built from raw DEX trades, so it reaches back further than the Trading cube's ~30 days. For live prices prefer the Trading cube entries at the top of this section.
-
-▶️ [Pairs of blur token new dataset](https://ide.bitquery.io/pairs-of-blur-token-new-dataset_1)
-
-#### NFT currencies on Solana by DEX'es
-
-The subscription query provided fetches the most-traded NFTs in the last few hours. For Solana, only realtime information is available, so the aggregate might not be accurate beyond a few hours. Built from raw DEX trades, so it reaches back further than the Trading cube's ~30 days. For live prices prefer the Trading cube entries at the top of this section.
-
-▶️ [NFT currencies on Solana by DEX'es](https://ide.bitquery.io/NFT-currencies-on-Solana-by-DEXes_1)
-
-### Transfers
-
-#### Get NFT transfers by wallet
-
-Get transfers of NFTs given the wallet.
-
-▶️ [Get NFT transfers by wallet](https://ide.bitquery.io/latest-nft-transfers-by-a-user)
-
-#### All transfers of an NFT
-
-Retrieves the most recent transfers of a specific non-fungible token (NFT) on the Ethereum network. You can find the GraphQL query.
-
-▶️ [All transfers of an NFT](https://ide.bitquery.io/All-transfers-of-an-NFT)
-
-#### NFT Token Transfers By Date
-
-NFT Token Transfers By Date.
-
-▶️ [NFT Token Transfers By Date](https://ide.bitquery.io/NFT-Token-Transfers-By-Date)
-
-#### Top transfered NFT tokens in network
-
-Fetches the most frequently transferred NFTs on the Ethereum Blockchain within the specified date range.
-
-▶️ [Top transfered NFT tokens in network](https://ide.bitquery.io/Top-transfered-NFT-tokens-in-network)
-
-#### Array_intersect example for NFT
-
-Array_intersect example for NFT.
-
-▶️ [Array_intersect example for NFT](https://ide.bitquery.io/array_intersect-example-for-NFT)
-
-#### Get all transfers of a specific nft
-
-Will give all the transfers of a particular NFT `0xb68CA010776B4584cf49893E75b66583eb884948`.
-
-▶️ [Get all transfers of a specific nft](https://ide.bitquery.io/get-all-transfers-of-a-specific-nft)
-
-### Balances & Holders
-
-#### Get Latest NFT Balance for an Address
-
-Get the latest NFT balance for a specific address and NFT collection. This query returns the current NFT count and ownership information.
-
-▶️ [Get Latest NFT Balance for an Address](https://ide.bitquery.io/Get-Latest-NFT-Balance-for-an-Address)
-
-#### Get All NFT Collections for an Address
-
-Retrieve all NFT collections held by a specific address. This query returns balances for all NFT collections the address owns.
-
-▶️ [Get All NFT Collections for an Address](https://ide.bitquery.io/Get-All-NFT-Collections-for-an-Address_1)
-
-#### Get NFT Owner for Specific Token ID
-
-Check the current owner of a specific NFT token ID. This query returns ownership information for a particular token.
-
-▶️ [Get NFT Owner for Specific Token ID](https://ide.bitquery.io/Get-NFT-Owner-for-Specific-Token-ID)
-
-#### Get NFT Balances for Multiple Addresses
-
-Get NFT balances for multiple addresses in a single query. Useful for portfolio tracking or wallet monitoring applications.
-
-▶️ [Get NFT Balances for Multiple Addresses](https://ide.bitquery.io/Get-NFT-Balances-for-Multiple-Addresses_1)
-
-#### Get NFT Ownership History
-
-Retrieve the NFT ownership history of a specific NFT over a specific time period. This helps track NFT transfers and ownership changes.
-
-▶️ [Get NFT Ownership History](https://ide.bitquery.io/Get-NFT-Ownership-History_2)
-
-### Price & OHLC
-
-#### Smart contract calls to an nft contract
-
-Smart contract calls to an nft contract.
-
-▶️ [Smart contract calls to an nft contract](https://ide.bitquery.io/Smart-contract-calls-to-an-nft-contract)
-
-### Events & Calls
-
-#### All refinance loans for specific NFT collection
-
-To retrieve all refinance loans for a specific NFT collection, we filter Refinance event arguments in.
-
-▶️ [All refinance loans for specific NFT collection](https://ide.bitquery.io/All-refinance-loans-for-specificNFT-collection)
-
-#### Auction on blur marketplace
-
-The 'StartAuction' event is triggered when an NFT auction starts on the Blur : Blend Contract. The following.
-
-▶️ [Auction on blur marketplace](https://ide.bitquery.io/Auction-on-blur-marketplace)
-
-#### Creator_of_an_NFT
-
-Creator_of_an_NFT.
-
-▶️ [Creator_of_an_NFT](https://ide.bitquery.io/Creator_of_an_NFT)
-
-#### Latest Cancelled offers on Blur NFT marketplace
-
-On the BLUR market, the 'OfferCancelled' event initiates when an offer is withdrawn or cancelled. The following.
-
-▶️ [Latest Cancelled offers on Blur NFT marketplace](https://ide.bitquery.io/Latest-Cancelled-offers-on-Blur-NFT-marketplace)
-
-#### Latest Loans for a specific borrower on Blur marketplace
-
-Same as previous queries, this query will return details about the block, transaction, log, and arguments. By modifying the 'Arguments.includes' filter, you can track loan activities for different NFT collections on the Blur marketplace.
-
-▶️ [Latest Loans for a specific borrower on Blur marketplace](https://ide.bitquery.io/Latest-Loans-for-a-specificborrower-on-Blur-marketplace)
-
-#### Latest Seized NFTs on Blur marketplace
-
-When a seizure event happens, control of the NFT shifts to the lender or an enforcing third party. The.
-
-▶️ [Latest Seized NFTs on Blur marketplace](https://ide.bitquery.io/Latest-Seized-NFTs-on-Blur-marketplace)
-
-#### Latest loans for specific NFT token
-
-Latest loans for specific NFT token.
-
-▶️ [Latest loans for specific NFT token](https://ide.bitquery.io/Latest-loans-for-specific-NFTtoken)
-
-#### Loan history for specific NFT ID
-
-Loan history for specific NFT ID.
-
-▶️ [Loan history for specific NFT ID](https://ide.bitquery.io/Loan-history-for-specific-NFTID)
-
-#### Loan repayment of blur marketplace
-
-For loan repayment transactions on the BLUR market, use the.
-
-▶️ [Loan repayment of blur marketplace](https://ide.bitquery.io/Loan-repayment-of-blur-marketplace)
-
-#### Loans above a specific amount on the Blur NFT marketplace
-
-If we want to track loans above a specific amount on the Blur marketplace, we can use the following.
-
-▶️ [Loans above a specific amount on the Blur NFT marketplace](https://ide.bitquery.io/Loans-above-a-specific-amount-on-the-Blur-NFT-marketplace)
-
-#### Locked NFT bought on Blur marketplace
-
-Locked NFTs are temporarily non-transferrable and can be traded or transferred after the lock period. These NFTs are often cheaper than non-locked. The following.
-
-▶️ [Locked NFT bought on Blur marketplace](https://ide.bitquery.io/Locked-NFT-bought-on-Blur-marketplace)
-
-## Futures DEXs
-
-### Trades
-
-#### All events of AsterDEX
-
-Monitor all events emitted by the AsterDEX contract to track all platform activities.
-
-▶️ [All events of AsterDEX](https://ide.bitquery.io/All-events-of-AsterDEX)
-
-#### AsterDEX - All latest Liquidations
-
-When there is a liquidation event on AsterDEX, it emits `ExecuteCloseSuccessful` event with `executionType` 2.
-
-▶️ [AsterDEX - All latest Liquidations](https://ide.bitquery.io/AsterDEX---All-latest-Liquidations)
-
-#### AsterDEX - OpenMarketTrade
-
-AsterDEX - OpenMarketTrade. Uses the `Events` cube. Replace the address in the `where` clause to use it.
-
-▶️ [AsterDEX - OpenMarketTrade](https://ide.bitquery.io/AsterDEX---OpenMarketTrade)
-
-#### Trader's specific event
-
-You can look for `Transaction -> From` or in some cases the address might be in arguments, for example.
-
-▶️ [Trader's specific event](https://ide.bitquery.io/Traders-specific-event)
-
-#### Traders data - 0x01554d63537d3c62715826a268d4eab645d64b92
-
-You can actually merge these two queries. Here is an example.
-
-▶️ [Traders data - 0x01554d63537d3c62715826a268d4eab645d64b92](https://ide.bitquery.io/Copy-of-Traders-data---0x01554d63537d3c62715826a268d4eab645d64b92)
-
-#### Traders data - 0x2b7363708984aa25a90450cfca7bedaf6804115c
-
-Using Bitquery's APIs you can follow specific traders on AsterDEX to check all their latest activities.
-
-▶️ [Traders data - 0x2b7363708984aa25a90450cfca7bedaf6804115c](https://ide.bitquery.io/Traders-data---0x2b7363708984aa25a90450cfca7bedaf6804115c)
-
-## x402
-
-### Trades
-
-#### Payment Analytics for x402 Server on Solana
-
-Payment Analytics for x402 Server on Solana. Replace the address in the `where` clause to use it.
-
-▶️ [Payment Analytics for x402 Server on Solana](https://ide.bitquery.io/Payment-analytics-related-specific-x402-server-on-Solana)
-
-### Transfers
-
-#### Get Latest Payments to x402 Server
-
-Get Latest Payments to x402 Server. Uses the `Transfers` cube.
-
-▶️ [Get Latest Payments to x402 Server](https://ide.bitquery.io/Latest-payment-to-specific-x402-server)
-
-#### Get Latest Payments to x402 Server on Solana
-
-Get Latest Payments to x402 Server on Solana. Uses the `Transfers` cube. Replace the address in the `where` clause to use it.
-
-▶️ [Get Latest Payments to x402 Server on Solana](https://ide.bitquery.io/Latest-Payment-to-specific-x402-server-taking-solana-payments)
-
-#### Payment Analytics for x402 Server
-
-Comprehensive payment analytics including total volume, unique users, transaction counts, and time-based breakdowns for a specific x402 server.
-
-▶️ [Payment Analytics for x402 Server](https://ide.bitquery.io/Payment-analytics-related-specific-x402-server)
