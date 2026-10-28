@@ -16,98 +16,37 @@ Every subscription below is saved in the [Bitquery IDE](https://ide.bitquery.io)
 
 ## Table of Contents
 
-- [Arc Mainnet](#arc-mainnet)
-- [Bitcoin](#bitcoin)
+- [Most Popular Streams](#most-popular-streams)
 - [Solana](#solana)
 - [Robinhood Chain](#robinhood-chain)
 - [Polymarket](#polymarket)
 - [Perpetuals](#perpetuals)
 - [TRON](#tron)
-- [Cross-Chain](#cross-chain)
+- [Bitcoin](#bitcoin)
 - [Ethereum](#ethereum)
 - [BSC](#bsc)
 - [Base](#base)
-- [Arbitrum](#arbitrum)
-- [Optimism](#optimism)
-- [Polygon](#polygon)
+- [Cross-Chain](#cross-chain)
 - [Trading API](#trading-api)
 - [Stablecoins](#stablecoins)
 - [NFTs](#nfts)
+- [Arbitrum](#arbitrum)
+- [Optimism](#optimism)
+- [Polygon](#polygon)
+- [Arc Mainnet](#arc-mainnet)
 - [x402](#x402)
 
-## Arc Mainnet
+## Most Popular Streams
 
-### Trades
+The streaming subscriptions people open most, from Keyword.com search demand and Google Analytics IDE pageviews. One-shot query versions live in [starter-queries.md](./starter-queries.md).
 
-#### Stream real-time trades on Arc
-
-One WebSocket delivers every swap on the network as blocks are indexed, with both sides, the protocol and the trader.
-
-▶️ [Stream real-time trades on Arc](https://ide.bitquery.io/arc-mainnet-stream-dex-trades)
-
-### Transfers
-
-#### Stream real-time transfers on Arc
-
-Every transfer on the network as it is indexed. Filter inside `where` to narrow the socket to a token, an address or a size floor.
-
-▶️ [Stream real-time transfers on Arc](https://ide.bitquery.io/arc-mainnet-stream-transfers)
-
-### Balances & Holders
-
-#### Stream balance changes on Arc
-
-Every balance change of a wallet as it happens. Widen the filter to a list of addresses or a single token to build alerts.
-
-▶️ [Stream balance changes on Arc](https://ide.bitquery.io/arc-mainnet-docs-balances-stream-balance-changes)
-
-### Supply & Market Cap
-
-#### Stream supply changes on Arc
-
-A new row arrives whenever a mint or burn changes the supply of the token.
-
-▶️ [Stream supply changes on Arc](https://ide.bitquery.io/arc-mainnet-docs-balances-stream-supply-changes)
-
-### Transactions
-
-#### Stream transactions on Arc
-
-Every transaction as blocks are indexed. Arc produces a block well under every second, so expect a steady feed.
-
-▶️ [Stream transactions on Arc](https://ide.bitquery.io/arc-mainnet-stream-transactions)
-
-### Events & Calls
-
-#### Stream calls to a contract on Arc
-
-Every call into the Uniswap v4 PoolManager, internal or top-level, as it happens.
-
-▶️ [Stream calls to a contract on Arc](https://ide.bitquery.io/arc-mainnet-stream-calls-to-contract)
-
-#### Stream all events on Arc
-
-One socket, every event on the chain. Good for building an indexer; heavy for anything else, so use the filtered streams below in production.
-
-▶️ [Stream all events on Arc](https://ide.bitquery.io/arc-mainnet-stream-all-events)
-
-### Launchpads
-
-#### Stream launches on Arc
-
-Change nothing else to receive launches from all six platforms over one WebSocket. Add or remove contract and signature pairs as launchpads deploy new versions.
-
-▶️ [Stream launches on Arc](https://ide.bitquery.io/arc-mainnet-docs-launchpads-stream-launches)
-
-## Bitcoin
-
-### Price & OHLC
-
-#### Latest Bitcoin Price
-
-You can stream Bitcoin price at 1-second interval using the [Crypto Price APIs](/docs/trading/crypto-price-api/).
-
-▶️ [Latest Bitcoin Price](https://ide.bitquery.io/Stream-Bitcoin-Price-Across-Chains)
+- **Solana — Track token migrations to Raydium (realtime)** — [open](https://ide.bitquery.io/Track-Token-Migrations-to-Raydium-DEX-and-Raydium-CPMM-in-realtime)
+- **Solana — PumpSwap trades** — [open](https://ide.bitquery.io/pumpswap-trades)
+- **Solana — Trades subscription** — [open](https://ide.bitquery.io/solana-trades-subscription_3)
+- **Robinhood Chain — Stream chain trades** — [open](https://ide.bitquery.io/stream-robinhood-chain-trades)
+- **Robinhood Chain — Latest trades** — [open](https://ide.bitquery.io/Robinhood-Trades)
+- **TRON — USDT TRC-20 transfers** — [open](https://ide.bitquery.io/usdt-trc20-transfers_1)
+- **Bitcoin — Stream price across chains** — [open](https://ide.bitquery.io/Stream-Bitcoin-Price-Across-Chains)
 
 ## Solana
 
@@ -1043,21 +982,15 @@ Provides real-time data on token transfers happening in the TRON mempool includi
 
 ▶️ [Tron mempool transfers](https://ide.bitquery.io/Tron-mempool-transfers)
 
-## Cross-Chain
+## Bitcoin
 
 ### Price & OHLC
 
-#### Crypto Price Stream
+#### Latest Bitcoin Price
 
-This subscription gives you 1-second OHLC, mean price, averages for all tokens across Solana, Ethereum, BNB, Tron.
+You can stream Bitcoin price at 1-second interval using the [Crypto Price APIs](/docs/trading/crypto-price-api/).
 
-▶️ [Crypto Price Stream](https://ide.bitquery.io/1-second-crypto-price-stream-with-mcap)
-
-#### Stablecoin 1 sec Price Stream
-
-This subscription gives you 1-second OHLC, mean price, averages for all stablecoins including USDC, USDT, DAI, USDS etc.
-
-▶️ [Stablecoin 1 sec Price Stream](https://ide.bitquery.io/stablecoin-1-second-price-stream)
+▶️ [Latest Bitcoin Price](https://ide.bitquery.io/Stream-Bitcoin-Price-Across-Chains)
 
 ## Ethereum
 
@@ -2167,185 +2100,21 @@ Liquidity for v4 pools is reconstructed by stepping through each price range whe
 
 ▶️ [Uniswap v4 pool liquidity by poolid base](https://ide.bitquery.io/uniswap-v4-pool-liquidity-by-poolid-base)
 
-## Arbitrum
-
-### Trades
-
-#### Arbitrum Dextrades subscription
-
-This example uses the chain-specific the Trading cube via `EVM(network: arbitrum) { the Trading cube }` (pool-side Buy/Sell; see the Trading cube). USD can be weak on thin pools. For trader + USD swap rows, use the stream at the top. Built from raw DEX trades, so it carries per-swap detail the Trading cube normalises away. For a clean USD price feed prefer the Trading cube entries at the top of this section. Trading cube - MEV-filtered trades with USD prices on every row.
-
-▶️ [Arbitrum Dextrades subscription](https://ide.bitquery.io/Arbitrum-Dextrades-subscription)
-
-### Supply & Market Cap
-
-#### Arbitrum token marketcap stream
-
-Subscribe to `Tokens` where currency id includes `arbitrum`, with interval duration greater than 1 (second). You get token fields, block time, supply (MarketCap, FullyDilutedValuationUsd), price (OHLC and mean), and volume.
-
-▶️ [Arbitrum token marketcap stream](https://ide.bitquery.io/arbitrum-token-marketcap-stream)
-
-#### Realtime stream arbitrum tokens with marketcap above 1 million
-
-Subscribe when `Token.Id` matches Arbitrum (`arbitrum`) and `Supply.MarketCap` > 1,000,000 (USD).
-
-▶️ [Realtime stream arbitrum tokens with marketcap above 1 million](https://ide.bitquery.io/realtime-stream-arbitrum-tokens-with-marketcap-above-1-million)
-
-### Liquidity & Pools
-
-#### Realtime liquidity stream
-
-This subscription query returns real-time liquidity data for all DEX pools on Arbitrum. You can monitor liquidity changes, pool reserves, and spot prices as trades and liquidity modifications occur across all pools.
-
-▶️ [Realtime liquidity stream](https://ide.bitquery.io/realtime-liquidity-stream_1)
-
-#### Realtime liquidity stream of a specific pool
-
-This subscription query monitors real-time liquidity changes for a specific DEX pool on Arbitrum. Use this to track liquidity events, pool reserves, and spot prices for a particular pool as they occur.
-
-▶️ [Realtime liquidity stream of a specific pool](https://ide.bitquery.io/realtime-liquidity-stream-of-a-specific-pool)
-
-#### Realtime slippage on arbitrum
-
-This subscription query returns real-time slippage data for all DEX pools on Arbitrum. You can monitor price impact and liquidity depth as trades occur.
-
-▶️ [Realtime slippage on arbitrum](https://ide.bitquery.io/realtime-slippage-on-arbitrum)
-
-### Transactions
-
-#### Arbitrum: Timeboost Auction Transactions in Realtime
-
-Use the following subscription in the Bitquery IDE to watch every TimeBoost auction interaction. The query filters on the auction contract address and surfaces both transaction context and decoded ABI arguments.
-
-▶️ [Arbitrum: Timeboost Auction Transactions in Realtime](https://ide.bitquery.io/Arbitrum-Timeboost-Auction-Transactions-in-Realtime)
-
-### Uniswap
-
-#### Latest liquidity changes in uniswap v4 pools
-
-This subscription query monitors real-time liquidity changes for all pools in a specific DEX protocol on Arbitrum. Here we have taken example of Uniswap V4.
-
-▶️ [Latest liquidity changes in uniswap v4 pools](https://ide.bitquery.io/latest-liquidity-changes-in-uniswap-v4-pools)
-
-#### Real time trades for uniswap v4 arbitrum
-
-The Uniswap v4 PoolManager contract emits all pool-related events, including pool initialization, swaps, and liquidity modifications, and serves as the single on-chain source of truth for Uniswap v4 activity on Arbitrum. Trading cube - MEV-filtered trades with USD prices on every row.
-
-▶️ [Real time trades for uniswap v4 arbitrum](https://ide.bitquery.io/Real-time-trades-for-uniswap-v4-arbitrum)
-
-## Optimism
-
-### Trades
-
-#### Real time trades for uniswap v4 optimism
-
-The Uniswap v4 PoolManager contract emits all pool-related events, including pool initialization, swaps, and liquidity modifications, and serves as the single on-chain source of truth for Uniswap v4 activity on Optimism. Trading cube - MEV-filtered trades with USD prices on every row.
-
-▶️ [Real time trades for uniswap v4 optimism](https://ide.bitquery.io/Real-time-trades-for-uniswap-v4-optimism)
-
-#### Realtime optimism dex trades websocket
-
-This example uses the chain-specific the Trading cube via `EVM(network: optimism) { the Trading cube }` (pool-side Buy/Sell; see the Trading cube). USD can be weak on thin pools. For trader + USD swap rows, use the stream at the top. Built from raw DEX trades, so it carries per-swap detail the Trading cube normalises away. For a clean USD price feed prefer the Trading cube entries at the top of this section. Trading cube - MEV-filtered trades with USD prices on every row.
-
-▶️ [Realtime optimism dex trades websocket](https://ide.bitquery.io/Realtime-optimism-dex-trades-websocket)
-
-### Transfers
-
-#### Sender is a particular address
-
-Sender is a particular address. Uses the `Transfers` cube.
-
-▶️ [Sender is a particular address](https://ide.bitquery.io/Sender-is-a-particular-address)
-
-#### Whale transfers of USDT on optimism
-
-The subscription query below fetches the whale transactions on the Optimism network. We have used USDT address `0x94b008aA00579c1307B0EF2c499aD98a8ce58e58`
-
-▶️ [Whale transfers of USDT on optimism](https://ide.bitquery.io/Whale-transfers-of-USDT-on-optimism)
+## Cross-Chain
 
 ### Price & OHLC
 
-#### Price of WETH in terms of USDC on Optimism
+#### Crypto Price Stream
 
-Provides real-time updates on price of WETH `0x4200000000000000000000000000000000000006` in terms of USD Coin `0x7f5c764cbc14f9669b88837ca1490cca17c31607`, including details about the DEX, market, and order specifics. Trading cube - MEV-filtered trades with USD prices on every row.
+This subscription gives you 1-second OHLC, mean price, averages for all tokens across Solana, Ethereum, BNB, Tron.
 
-▶️ [Price of WETH in terms of USDC on Optimism](https://ide.bitquery.io/Price-of-WETH-in-terms-of-USDC-on-Optimism)
+▶️ [Crypto Price Stream](https://ide.bitquery.io/1-second-crypto-price-stream-with-mcap)
 
-#### Get latest price of WBTC in USD on optimism
+#### Stablecoin 1 sec Price Stream
 
-Retrieves the USD price of a token on Optimism by setting `SmartContract: {is: "0x68f180fcCe6836688e9084f035309E29Bf0A2095"}` . Check the field `PriceInUSD` for the USD value. You can access the query. Trading cube - MEV-filtered trades with USD prices on every row.
+This subscription gives you 1-second OHLC, mean price, averages for all stablecoins including USDC, USDT, DAI, USDS etc.
 
-▶️ [Get latest price of WBTC in USD on optimism](https://ide.bitquery.io/Get-latest-price-of-WBTC-in-USD-on-optimism)
-
-## Polygon
-
-### Trades
-
-#### Real time trades for uniswap v4 matic
-
-The Uniswap v4 PoolManager contract emits all pool-related events, including pool initialization, swaps, and liquidity modifications, and serves as the single on-chain source of truth for Uniswap v4 activity on Matic. Trading cube - MEV-filtered trades with USD prices on every row.
-
-▶️ [Real time trades for uniswap v4 matic](https://ide.bitquery.io/Real-time-trades-for-uniswap-v4-matic)
-
-#### Realtime matic dex trades websocket
-
-Read the Trading cube vs the Trading cube vs Trades cube to understand when to use which cube. Built from raw DEX trades, so it carries per-swap detail the Trading cube normalises away. For a clean USD price feed prefer the Trading cube entries at the top of this section. Trading cube - MEV-filtered trades with USD prices on every row.
-
-▶️ [Realtime matic dex trades websocket](https://ide.bitquery.io/Realtime-matic-dex-trades-websocket)
-
-### Transfers
-
-#### Sender is a particular address
-
-Sender is a particular address. Uses the `Transfers` cube.
-
-▶️ [Sender is a particular address](https://ide.bitquery.io/Sender-is-a-particular-address_2)
-
-#### Whale transfers of USDC on matic
-
-The subscription query below fetches the whale transactions on the MATIC network. We have used USDC address `0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359`.
-
-▶️ [Whale transfers of USDC on matic](https://ide.bitquery.io/Whale-transfers-of-USDC-on-matic)
-
-### Supply & Market Cap
-
-#### All trades on Polygon with Price, Marketcap, supply
-
-Crypto Trades API: one row per swap, with USD and supply. For Polygon use `Pair.Market.Network: Matic`. When to use this vs chain DEX APIs.
-
-▶️ [All trades on Polygon with Price, Marketcap, supply](https://ide.bitquery.io/All-trades-on-Polygon-with-Price-Marketcap-supply)
-
-#### Matic token marketcap stream
-
-Subscribe to `Tokens` where currency id includes `matic`, with interval duration greater than 1 (second).
-
-▶️ [Matic token marketcap stream](https://ide.bitquery.io/matic-token-marketcap-stream)
-
-### Liquidity & Pools
-
-#### Latest Liquidity Changes of Pools in a Specific DEX Protocol - Uniswap V4
-
-This subscription query monitors real-time liquidity changes for all pools in a specific DEX protocol on Matic. Here we have taken example of Uniswap V4.
-
-▶️ [Latest Liquidity Changes of Pools in a Specific DEX Protocol - Uniswap V4](https://ide.bitquery.io/Latest-Liquidity-Changes-of-Pools-in-a-Specific-DEX-Protocol---Uniswap-V4_7)
-
-#### Realtime Liquidity Stream
-
-This subscription query returns real-time liquidity data for all DEX pools on Matic. You can monitor liquidity changes, pool reserves, and spot prices as trades and liquidity modifications occur across all pools.
-
-▶️ [Realtime Liquidity Stream](https://ide.bitquery.io/Realtime-Liquidity-Stream_5)
-
-#### Realtime Liquidity Stream of a Specific Pool
-
-This subscription query monitors real-time liquidity changes for a specific DEX pool on Matic. Use this to track liquidity events, pool reserves, and spot prices for a particular pool as they occur.
-
-▶️ [Realtime Liquidity Stream of a Specific Pool](https://ide.bitquery.io/Realtime-Liquidity-Stream-of-a-Specific-Pool_5)
-
-#### Realtime slippage on matic
-
-This subscription query returns real-time slippage data for all DEX pools on Matic. You can monitor price impact and liquidity depth as trades occur.
-
-▶️ [Realtime slippage on matic](https://ide.bitquery.io/realtime-slippage-on-matic)
+▶️ [Stablecoin 1 sec Price Stream](https://ide.bitquery.io/stablecoin-1-second-price-stream)
 
 ## Trading API
 
@@ -2780,6 +2549,250 @@ Subscribe to real-time NFT balance updates for a specific address and collection
 Monitor NFT transfers for a specific collection across all transactions. This helps track NFT movements and ownership changes.
 
 ▶️ [Track Specific NFT Balance Changes](https://ide.bitquery.io/Track-specific-NFTs-Balance-Changes)
+
+## Arbitrum
+
+### Trades
+
+#### Arbitrum Dextrades subscription
+
+This example uses the chain-specific the Trading cube via `EVM(network: arbitrum) { the Trading cube }` (pool-side Buy/Sell; see the Trading cube). USD can be weak on thin pools. For trader + USD swap rows, use the stream at the top. Built from raw DEX trades, so it carries per-swap detail the Trading cube normalises away. For a clean USD price feed prefer the Trading cube entries at the top of this section. Trading cube - MEV-filtered trades with USD prices on every row.
+
+▶️ [Arbitrum Dextrades subscription](https://ide.bitquery.io/Arbitrum-Dextrades-subscription)
+
+### Supply & Market Cap
+
+#### Arbitrum token marketcap stream
+
+Subscribe to `Tokens` where currency id includes `arbitrum`, with interval duration greater than 1 (second). You get token fields, block time, supply (MarketCap, FullyDilutedValuationUsd), price (OHLC and mean), and volume.
+
+▶️ [Arbitrum token marketcap stream](https://ide.bitquery.io/arbitrum-token-marketcap-stream)
+
+#### Realtime stream arbitrum tokens with marketcap above 1 million
+
+Subscribe when `Token.Id` matches Arbitrum (`arbitrum`) and `Supply.MarketCap` > 1,000,000 (USD).
+
+▶️ [Realtime stream arbitrum tokens with marketcap above 1 million](https://ide.bitquery.io/realtime-stream-arbitrum-tokens-with-marketcap-above-1-million)
+
+### Liquidity & Pools
+
+#### Realtime liquidity stream
+
+This subscription query returns real-time liquidity data for all DEX pools on Arbitrum. You can monitor liquidity changes, pool reserves, and spot prices as trades and liquidity modifications occur across all pools.
+
+▶️ [Realtime liquidity stream](https://ide.bitquery.io/realtime-liquidity-stream_1)
+
+#### Realtime liquidity stream of a specific pool
+
+This subscription query monitors real-time liquidity changes for a specific DEX pool on Arbitrum. Use this to track liquidity events, pool reserves, and spot prices for a particular pool as they occur.
+
+▶️ [Realtime liquidity stream of a specific pool](https://ide.bitquery.io/realtime-liquidity-stream-of-a-specific-pool)
+
+#### Realtime slippage on arbitrum
+
+This subscription query returns real-time slippage data for all DEX pools on Arbitrum. You can monitor price impact and liquidity depth as trades occur.
+
+▶️ [Realtime slippage on arbitrum](https://ide.bitquery.io/realtime-slippage-on-arbitrum)
+
+### Transactions
+
+#### Arbitrum: Timeboost Auction Transactions in Realtime
+
+Use the following subscription in the Bitquery IDE to watch every TimeBoost auction interaction. The query filters on the auction contract address and surfaces both transaction context and decoded ABI arguments.
+
+▶️ [Arbitrum: Timeboost Auction Transactions in Realtime](https://ide.bitquery.io/Arbitrum-Timeboost-Auction-Transactions-in-Realtime)
+
+### Uniswap
+
+#### Latest liquidity changes in uniswap v4 pools
+
+This subscription query monitors real-time liquidity changes for all pools in a specific DEX protocol on Arbitrum. Here we have taken example of Uniswap V4.
+
+▶️ [Latest liquidity changes in uniswap v4 pools](https://ide.bitquery.io/latest-liquidity-changes-in-uniswap-v4-pools)
+
+#### Real time trades for uniswap v4 arbitrum
+
+The Uniswap v4 PoolManager contract emits all pool-related events, including pool initialization, swaps, and liquidity modifications, and serves as the single on-chain source of truth for Uniswap v4 activity on Arbitrum. Trading cube - MEV-filtered trades with USD prices on every row.
+
+▶️ [Real time trades for uniswap v4 arbitrum](https://ide.bitquery.io/Real-time-trades-for-uniswap-v4-arbitrum)
+
+## Optimism
+
+### Trades
+
+#### Real time trades for uniswap v4 optimism
+
+The Uniswap v4 PoolManager contract emits all pool-related events, including pool initialization, swaps, and liquidity modifications, and serves as the single on-chain source of truth for Uniswap v4 activity on Optimism. Trading cube - MEV-filtered trades with USD prices on every row.
+
+▶️ [Real time trades for uniswap v4 optimism](https://ide.bitquery.io/Real-time-trades-for-uniswap-v4-optimism)
+
+#### Realtime optimism dex trades websocket
+
+This example uses the chain-specific the Trading cube via `EVM(network: optimism) { the Trading cube }` (pool-side Buy/Sell; see the Trading cube). USD can be weak on thin pools. For trader + USD swap rows, use the stream at the top. Built from raw DEX trades, so it carries per-swap detail the Trading cube normalises away. For a clean USD price feed prefer the Trading cube entries at the top of this section. Trading cube - MEV-filtered trades with USD prices on every row.
+
+▶️ [Realtime optimism dex trades websocket](https://ide.bitquery.io/Realtime-optimism-dex-trades-websocket)
+
+### Transfers
+
+#### Sender is a particular address
+
+Sender is a particular address. Uses the `Transfers` cube.
+
+▶️ [Sender is a particular address](https://ide.bitquery.io/Sender-is-a-particular-address)
+
+#### Whale transfers of USDT on optimism
+
+The subscription query below fetches the whale transactions on the Optimism network. We have used USDT address `0x94b008aA00579c1307B0EF2c499aD98a8ce58e58`
+
+▶️ [Whale transfers of USDT on optimism](https://ide.bitquery.io/Whale-transfers-of-USDT-on-optimism)
+
+### Price & OHLC
+
+#### Price of WETH in terms of USDC on Optimism
+
+Provides real-time updates on price of WETH `0x4200000000000000000000000000000000000006` in terms of USD Coin `0x7f5c764cbc14f9669b88837ca1490cca17c31607`, including details about the DEX, market, and order specifics. Trading cube - MEV-filtered trades with USD prices on every row.
+
+▶️ [Price of WETH in terms of USDC on Optimism](https://ide.bitquery.io/Price-of-WETH-in-terms-of-USDC-on-Optimism)
+
+#### Get latest price of WBTC in USD on optimism
+
+Retrieves the USD price of a token on Optimism by setting `SmartContract: {is: "0x68f180fcCe6836688e9084f035309E29Bf0A2095"}` . Check the field `PriceInUSD` for the USD value. You can access the query. Trading cube - MEV-filtered trades with USD prices on every row.
+
+▶️ [Get latest price of WBTC in USD on optimism](https://ide.bitquery.io/Get-latest-price-of-WBTC-in-USD-on-optimism)
+
+## Polygon
+
+### Trades
+
+#### Real time trades for uniswap v4 matic
+
+The Uniswap v4 PoolManager contract emits all pool-related events, including pool initialization, swaps, and liquidity modifications, and serves as the single on-chain source of truth for Uniswap v4 activity on Matic. Trading cube - MEV-filtered trades with USD prices on every row.
+
+▶️ [Real time trades for uniswap v4 matic](https://ide.bitquery.io/Real-time-trades-for-uniswap-v4-matic)
+
+#### Realtime matic dex trades websocket
+
+Read the Trading cube vs the Trading cube vs Trades cube to understand when to use which cube. Built from raw DEX trades, so it carries per-swap detail the Trading cube normalises away. For a clean USD price feed prefer the Trading cube entries at the top of this section. Trading cube - MEV-filtered trades with USD prices on every row.
+
+▶️ [Realtime matic dex trades websocket](https://ide.bitquery.io/Realtime-matic-dex-trades-websocket)
+
+### Transfers
+
+#### Sender is a particular address
+
+Sender is a particular address. Uses the `Transfers` cube.
+
+▶️ [Sender is a particular address](https://ide.bitquery.io/Sender-is-a-particular-address_2)
+
+#### Whale transfers of USDC on matic
+
+The subscription query below fetches the whale transactions on the MATIC network. We have used USDC address `0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359`.
+
+▶️ [Whale transfers of USDC on matic](https://ide.bitquery.io/Whale-transfers-of-USDC-on-matic)
+
+### Supply & Market Cap
+
+#### All trades on Polygon with Price, Marketcap, supply
+
+Crypto Trades API: one row per swap, with USD and supply. For Polygon use `Pair.Market.Network: Matic`. When to use this vs chain DEX APIs.
+
+▶️ [All trades on Polygon with Price, Marketcap, supply](https://ide.bitquery.io/All-trades-on-Polygon-with-Price-Marketcap-supply)
+
+#### Matic token marketcap stream
+
+Subscribe to `Tokens` where currency id includes `matic`, with interval duration greater than 1 (second).
+
+▶️ [Matic token marketcap stream](https://ide.bitquery.io/matic-token-marketcap-stream)
+
+### Liquidity & Pools
+
+#### Latest Liquidity Changes of Pools in a Specific DEX Protocol - Uniswap V4
+
+This subscription query monitors real-time liquidity changes for all pools in a specific DEX protocol on Matic. Here we have taken example of Uniswap V4.
+
+▶️ [Latest Liquidity Changes of Pools in a Specific DEX Protocol - Uniswap V4](https://ide.bitquery.io/Latest-Liquidity-Changes-of-Pools-in-a-Specific-DEX-Protocol---Uniswap-V4_7)
+
+#### Realtime Liquidity Stream
+
+This subscription query returns real-time liquidity data for all DEX pools on Matic. You can monitor liquidity changes, pool reserves, and spot prices as trades and liquidity modifications occur across all pools.
+
+▶️ [Realtime Liquidity Stream](https://ide.bitquery.io/Realtime-Liquidity-Stream_5)
+
+#### Realtime Liquidity Stream of a Specific Pool
+
+This subscription query monitors real-time liquidity changes for a specific DEX pool on Matic. Use this to track liquidity events, pool reserves, and spot prices for a particular pool as they occur.
+
+▶️ [Realtime Liquidity Stream of a Specific Pool](https://ide.bitquery.io/Realtime-Liquidity-Stream-of-a-Specific-Pool_5)
+
+#### Realtime slippage on matic
+
+This subscription query returns real-time slippage data for all DEX pools on Matic. You can monitor price impact and liquidity depth as trades occur.
+
+▶️ [Realtime slippage on matic](https://ide.bitquery.io/realtime-slippage-on-matic)
+
+## Arc Mainnet
+
+### Trades
+
+#### Stream real-time trades on Arc
+
+One WebSocket delivers every swap on the network as blocks are indexed, with both sides, the protocol and the trader.
+
+▶️ [Stream real-time trades on Arc](https://ide.bitquery.io/arc-mainnet-stream-dex-trades)
+
+### Transfers
+
+#### Stream real-time transfers on Arc
+
+Every transfer on the network as it is indexed. Filter inside `where` to narrow the socket to a token, an address or a size floor.
+
+▶️ [Stream real-time transfers on Arc](https://ide.bitquery.io/arc-mainnet-stream-transfers)
+
+### Balances & Holders
+
+#### Stream balance changes on Arc
+
+Every balance change of a wallet as it happens. Widen the filter to a list of addresses or a single token to build alerts.
+
+▶️ [Stream balance changes on Arc](https://ide.bitquery.io/arc-mainnet-docs-balances-stream-balance-changes)
+
+### Supply & Market Cap
+
+#### Stream supply changes on Arc
+
+A new row arrives whenever a mint or burn changes the supply of the token.
+
+▶️ [Stream supply changes on Arc](https://ide.bitquery.io/arc-mainnet-docs-balances-stream-supply-changes)
+
+### Transactions
+
+#### Stream transactions on Arc
+
+Every transaction as blocks are indexed. Arc produces a block well under every second, so expect a steady feed.
+
+▶️ [Stream transactions on Arc](https://ide.bitquery.io/arc-mainnet-stream-transactions)
+
+### Events & Calls
+
+#### Stream calls to a contract on Arc
+
+Every call into the Uniswap v4 PoolManager, internal or top-level, as it happens.
+
+▶️ [Stream calls to a contract on Arc](https://ide.bitquery.io/arc-mainnet-stream-calls-to-contract)
+
+#### Stream all events on Arc
+
+One socket, every event on the chain. Good for building an indexer; heavy for anything else, so use the filtered streams below in production.
+
+▶️ [Stream all events on Arc](https://ide.bitquery.io/arc-mainnet-stream-all-events)
+
+### Launchpads
+
+#### Stream launches on Arc
+
+Change nothing else to receive launches from all six platforms over one WebSocket. Add or remove contract and signature pairs as launchpads deploy new versions.
+
+▶️ [Stream launches on Arc](https://ide.bitquery.io/arc-mainnet-docs-launchpads-stream-launches)
 
 ## x402
 
