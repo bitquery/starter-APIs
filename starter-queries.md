@@ -16,7 +16,6 @@ Every query below is saved in the [Bitquery IDE](https://ide.bitquery.io) and wa
 
 ## Table of Contents
 
-- [Most Popular Queries](#most-popular-queries)
 - [Solana](#solana)
 - [Robinhood Chain](#robinhood-chain)
 - [Tokenized Stocks](#tokenized-stocks)
@@ -51,27 +50,6 @@ Every query below is saved in the [Bitquery IDE](https://ide.bitquery.io) and wa
 - [Dogecoin](#dogecoin)
 - [Dash](#dash)
 - [Zcash](#zcash)
-
-## Most Popular Queries
-
-The queries people open most, from Keyword.com search demand and Google Analytics IDE pageviews. Each links straight to a runnable query; streaming versions live in [starter-subscriptions.md](./starter-subscriptions.md).
-
-- **Solana — First buyers of a Pump.fun token (sniper detection)** — [open](https://ide.bitquery.io/Solana---First-buyers-of-a-Pumpfun-token-sniper-detection)
-- **Solana — PumpSwap latest trades** — [open](https://ide.bitquery.io/Pumpswap-latest-Trades-API)
-- **Solana — Swaps for a market address** — [open](https://ide.bitquery.io/swaps-for-a-market-address-on-Solana)
-- **Solana — Track token migrations to Raydium (realtime)** — [open](https://ide.bitquery.io/Track-Token-Migrations-to-Raydium-DEX-and-Raydium-CPMM-in-realtime)
-- **Robinhood Chain — Largest trades (24h, USD)** — [open](https://ide.bitquery.io/largest-swaps-robinhood-chain)
-- **Robinhood Chain — Stream chain trades** — [open](https://ide.bitquery.io/stream-robinhood-chain-trades)
-- **Robinhood Chain — Uniswap v4 pools** — [open](https://ide.bitquery.io/uniswap-v4-pools-on-robinhood-chain)
-- **Tokenized Stocks — Tesla xStock trades (realtime)** — [open](https://ide.bitquery.io/Tesla-stock-trades-stream)
-- **Polymarket — Latest prediction market trades** — [open](https://ide.bitquery.io/latest-prediction-market-trades_8)
-- **Hyperliquid — BTC perp trades** — [open](https://ide.bitquery.io/hyperliquid-btc-perp-trades)
-- **TRON — USDT TRC-20 transfers (stream)** — [open](https://ide.bitquery.io/usdt-trc20-transfers_1)
-- **TRON — Historical wallet balance** — [open](https://ide.bitquery.io/Historical-Tron-Wallet-Balance-for-a-currency)
-- **Bitcoin — Inflows & outflows of a wallet** — [open](https://ide.bitquery.io/Inflows-and-Outflow-of-a-bitcoin-wallet)
-- **Bitcoin — Transaction details** — [open](https://ide.bitquery.io/Details-of-Bitcoin-Transaction)
-- **Bitcoin — Stream price across chains** — [open](https://ide.bitquery.io/Stream-Bitcoin-Price-Across-Chains)
-- **Ethereum — ERC-20 transfers by wallet** — [open](https://ide.bitquery.io/Get-ERC20-token-transfers-by-wallet_7)
 
 ## Solana
 
